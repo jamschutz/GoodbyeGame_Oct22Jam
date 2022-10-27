@@ -45,7 +45,7 @@ namespace Utils
                 if(prefab.type != thisScenesPrefab) {
                     // ignore null prefabs
                     if(prefab.prefab == null) {
-                        Debug.LogWarning($"There is currently no object assigned to the prefab {prefab.type.ToString()}");
+                        UnityEngine.Debug.LogWarning($"There is currently no object assigned to the prefab {prefab.type.ToString()}");
                     }
                     else {
                         // if it's UI, we want to put it inside the Canvas...
