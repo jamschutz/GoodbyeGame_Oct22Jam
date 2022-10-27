@@ -5,6 +5,11 @@ using UnityEngine;
 public class ItemsController : MonoBehaviour
 {
     GameManager myGameManager;
+    public bool interacted;
+
+    [Header("Types of Interaction")]
+    public bool pickUp;
+    public bool dialogBox;
 
     // Start is called before the first frame update
     void Start()
@@ -15,13 +20,22 @@ public class ItemsController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (interacted)
+        {
+            if (pickUp)
+            {
+                pickedUp();
+            }
+        }
+
+
     }
 
     public void pickedUp()
     {
         myGameManager.Disc_Captain++;
         gameObject.SetActive(false);
+        interacted = false;
     }
 
    
