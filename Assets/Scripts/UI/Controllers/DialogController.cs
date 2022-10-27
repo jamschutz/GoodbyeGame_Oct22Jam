@@ -12,9 +12,11 @@ namespace UI.Controllers
         [Range(300, 3000)]
         public int charsPerMinute;
 
+        [Header("UI")]
+        public float yPos;
+
         // singleton instance
         public static DialogController instance;
-
 
         // private TMP variables
         private TMP_Text text;
@@ -50,6 +52,7 @@ namespace UI.Controllers
             // init vars
             waitBetweenChars = 60.0f / (float)charsPerMinute;
             text.text = "";
+            transform.localPosition = new Vector3(0, yPos, 0);
 
             // hide box
             HideDialogBox();

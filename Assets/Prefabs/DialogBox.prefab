@@ -263,3 +263,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   charsPerMinute: 3000
+  yPos: -340.67
