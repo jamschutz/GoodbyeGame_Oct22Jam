@@ -47,7 +47,7 @@ MonoBehaviour:
   thisScenesPrefab: 4
   allPrefabs:
   - type: 0
-    prefab: {fileID: 0}
+    prefab: {fileID: 4591122982772410025, guid: 9d981b37aea88844bbd6b96004d15445, type: 3}
   - type: 1
     prefab: {fileID: 0}
   - type: 2
