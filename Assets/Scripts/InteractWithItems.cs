@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickUpItems : MonoBehaviour
+public class InteractWithItems : MonoBehaviour
 {
     public KeyCode interactKey;
     public bool pressedInteractKey;
@@ -30,13 +30,17 @@ public class PickUpItems : MonoBehaviour
     }
 
    
-    
     private void OnTriggerStay2D(Collider2D collision)
     {
         if (collision.tag == "InteractableItems" && pressedInteractKey)
         {
-            //Debug.Log("123");
-            collision.gameObject.GetComponent<ItemsController>().pickedUp();
+            collision.gameObject.GetComponent<ItemsController>().interacted = true;
         }
+
+        if (collision.name == "AI Generater" && pressedInteractKey)
+        {
+            collision.gameObject.GetComponent<AIGenerator>().interacted = true;
+        }
+
     }
 }
