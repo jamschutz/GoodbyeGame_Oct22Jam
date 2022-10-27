@@ -18,6 +18,7 @@ namespace Utils
         [Header("This Scene")]
         public Prefab thisScenesPrefab;
         public bool createCanvas = true;
+        public bool deleteCamera = true;
 
         [Header("Prefabs")]
         public PrefabResource[] allPrefabs;
@@ -31,6 +32,11 @@ namespace Utils
             if(createCanvas) {
                 GameObject.Instantiate(canvas);
                 GameObject.Instantiate(eventSystem);
+            }
+
+            // delete camera
+            if(deleteCamera) {
+                Destroy(Camera.main.gameObject);
             }
 
             // create all prefabs
