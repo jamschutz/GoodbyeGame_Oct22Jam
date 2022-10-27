@@ -44,17 +44,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b2006f0029b4da43aefabe15353a56a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  thisScenesPrefab: 4
+  thisScenesPrefab: 3
+  createCanvas: 1
   allPrefabs:
   - type: 0
     prefab: {fileID: 4591122982772410025, guid: 9d981b37aea88844bbd6b96004d15445, type: 3}
+    isUi: 0
   - type: 1
     prefab: {fileID: 0}
+    isUi: 0
   - type: 2
     prefab: {fileID: 0}
+    isUi: 0
   - type: 3
     prefab: {fileID: 0}
+    isUi: 0
   - type: 4
-    prefab: {fileID: 1719042163950842830, guid: c576daffcca28a5489593d1250977324, type: 3}
+    prefab: {fileID: 1145421155889535031, guid: c576daffcca28a5489593d1250977324, type: 3}
+    isUi: 1
   - type: 5
     prefab: {fileID: 0}
+    isUi: 0
+  canvas: {fileID: 7378520394073794735, guid: bb4fddc490c1c354195f110267deda3a, type: 3}
+  eventSystem: {fileID: 7129096816406225153, guid: 1fdf63f83e269934ba1bf9689b43f8f7, type: 3}
