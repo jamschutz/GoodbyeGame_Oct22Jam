@@ -29,6 +29,7 @@ namespace UI.Controllers
 
         // input helpers
         private bool gotInput;
+        private bool isTalking;
 
         private void Awake()
         {
@@ -53,6 +54,7 @@ namespace UI.Controllers
             waitBetweenChars = 60.0f / (float)charsPerMinute;
             text.text = "";
             transform.localPosition = new Vector3(0, yPos, 0);
+            isTalking = false;
 
             // hide box
             HideDialogBox();
@@ -78,10 +80,17 @@ namespace UI.Controllers
         }
 
 
+        public bool IsTalking()
+        {
+            return isTalking;
+        }
+
+
         private IEnumerator TypeText()
         {
             // reset previous input registers
             gotInput = false;
+            isTalking = true;
 
             // show dialog
             foreach(var line in currentDialog) {
@@ -114,6 +123,7 @@ namespace UI.Controllers
             }
 
             text.text = "";
+            isTalking = false;
             HideDialogBox();
         }
 
