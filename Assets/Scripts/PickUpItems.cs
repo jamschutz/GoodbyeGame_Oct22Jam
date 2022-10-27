@@ -5,7 +5,7 @@ using UnityEngine;
 public class PickUpItems : MonoBehaviour
 {
     public KeyCode interactKey;
-
+    public bool pressedInteractKey;
 
     // Start is called before the first frame update
     void Start()
@@ -16,19 +16,27 @@ public class PickUpItems : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-    }
-
-    private void OnCollisionStay2D(Collision2D collision)
-    {
         if (Input.GetKeyDown(interactKey))
         {
-            if (collision.gameObject.tag == "InteractableItems")
-            {
-                //collision.gameObject.GetComponent
-            }
+            pressedInteractKey = true;
         }
 
-        
+        if (Input.GetKeyUp(interactKey))
+        {
+            pressedInteractKey = false;
+        }
+
+
+    }
+
+   
+    
+    private void OnTriggerStay2D(Collider2D collision)
+    {
+        if (collision.tag == "InteractableItems" && pressedInteractKey)
+        {
+            //Debug.Log("123");
+            collision.gameObject.GetComponent<ItemsController>().pickedUp();
+        }
     }
 }
