@@ -21,6 +21,10 @@ namespace UI.Controllers
         private string[] currentDialog;
         private float waitBetweenChars;
 
+        // game object references
+        private GameObject textObj;
+        private GameObject backgroundObj;
+
         // input helpers
         private bool gotInput;
 
@@ -40,10 +44,15 @@ namespace UI.Controllers
         {
             // get components
             text = GetComponentInChildren<TMP_Text>();
+            textObj = text.gameObject;
+            backgroundObj = GetComponentInChildren<UnityEngine.UI.Image>().gameObject;
 
             // init vars
             waitBetweenChars = 60.0f / (float)charsPerMinute;
             text.text = "";
+
+            // hide box
+            HideDialogBox();
         }
 
 
@@ -55,11 +64,13 @@ namespace UI.Controllers
         }
 
 
-        public void ShowDialog(string[] t)
+        public void ShowDialog(string[] dialog)
         {
             // set to dialog, and add an empty string to the end (to close the dialog out)
-            currentDialog = t;
+            currentDialog = dialog;
             StopAllCoroutines();
+
+            ShowDialogBox();
             StartCoroutine("TypeText");
         }
 
@@ -82,8 +93,6 @@ namespace UI.Controllers
                     if(gotInput) {
                         text.text = line;
 
-                        Debug.Log("got input!!!");
-
                         // wipe input flag so it doesn't get reused
                         gotInput = false;
                         break;
@@ -100,6 +109,23 @@ namespace UI.Controllers
                     yield return null;
                 }
             }
+
+            text.text = "";
+            HideDialogBox();
+        }
+
+
+        private void ShowDialogBox()
+        {
+            textObj.SetActive(true);
+            backgroundObj.SetActive(true);
+        }
+
+
+        private void HideDialogBox()
+        {
+            textObj.SetActive(false);
+            backgroundObj.SetActive(false);
         }
     }
 }
