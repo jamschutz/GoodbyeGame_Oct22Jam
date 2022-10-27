@@ -18,6 +18,7 @@ namespace Utils
         [Header("This Scene")]
         public Prefab thisScenesPrefab;
         public bool createCanvas = true;
+        public bool deleteCamera = true;
 
         [Header("Prefabs")]
         public PrefabResource[] allPrefabs;
@@ -33,13 +34,18 @@ namespace Utils
                 GameObject.Instantiate(eventSystem);
             }
 
+            // delete camera
+            if(deleteCamera) {
+                Destroy(Camera.main.gameObject);
+            }
+
             // create all prefabs
             foreach(var prefab in allPrefabs) {
                 // skip if this is the prefab we're testing in this scene...
                 if(prefab.type != thisScenesPrefab) {
                     // ignore null prefabs
                     if(prefab.prefab == null) {
-                        Debug.LogWarning($"There is currently no object assigned to the prefab {prefab.type.ToString()}");
+                        UnityEngine.Debug.LogWarning($"There is currently no object assigned to the prefab {prefab.type.ToString()}");
                     }
                     else {
                         // if it's UI, we want to put it inside the Canvas...
