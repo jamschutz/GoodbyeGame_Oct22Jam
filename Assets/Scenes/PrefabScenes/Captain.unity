@@ -397,7 +397,7 @@ MonoBehaviour:
   dialog:
   - Ahoy, there!
   - This is your Captain!
---- !u!114 &1926952449
+--- !u!114 &1926952451
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -411,4 +411,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveSpeed: 5
   followDistance: 3
-  startingState: 0
+  startingState: 1

@@ -5,14 +5,17 @@ using UnityEngine;
 public class AIGenerator : MonoBehaviour
 {
     public GameObject[] AIs;
-    public GameObject[] hats;
+    public Sprite[] hatSprites;
     public GameObject surface;
     public GameManager myManager;
     public bool interacted;
-
+    int hatIndex;
+    bool generatorIsWorking;
+    GameObject hat;
     // Start is called before the first frame update
     void Start()
     {
+        hatIndex = 0;
         myManager = GameObject.Find("GameManager").GetComponent<GameManager>();
     }
 
@@ -24,9 +27,44 @@ public class AIGenerator : MonoBehaviour
             if (myManager.Disc_Captain > 0)
             {
                 surface.SetActive(true);
-                Instantiate(AIs[0]);
-                AIs[0].transform.position = surface.transform.position;
+                GameObject captain = Instantiate(AIs[0]);
+                captain.transform.position = surface.transform.position;
+                hat = captain.transform.Find("Hat").gameObject;
+                hat.GetComponent<SpriteRenderer>().sprite = hatSprites[hatIndex];
+                generatorIsWorking = true;
                 myManager.Disc_Captain --;
+            }
+            if (generatorIsWorking)
+            {
+                Debug.Log(hatIndex);
+                if (Input.GetKeyDown(KeyCode.RightArrow))
+                {
+                    if (hatIndex == hatSprites.Length-1)
+                    {
+                        hatIndex = 0;
+                    }
+                    else
+                    {
+                        hatIndex++;
+                    }
+                    
+
+                }
+                if (Input.GetKeyDown(KeyCode.LeftArrow))
+                {
+                    if (hatIndex == 0)
+                    {
+                        hatIndex = hatSprites.Length - 1;
+                    }
+                    else
+                    {
+                        hatIndex--;
+                    }
+
+                }
+                hat.GetComponent<SpriteRenderer>().sprite = hatSprites[hatIndex];
+
+
             }
 
 
@@ -35,6 +73,7 @@ public class AIGenerator : MonoBehaviour
             {
                 surface.SetActive(false);
                 interacted = false;
+                generatorIsWorking = false;
             }
 
         }
