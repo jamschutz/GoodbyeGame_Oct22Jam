@@ -9,10 +9,13 @@ public class PlayerController : MonoBehaviour
 
     Vector2 movement;
 
+    Animator myAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        myAnimator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -20,7 +23,40 @@ public class PlayerController : MonoBehaviour
     {
         //Input
         movement.x = Input.GetAxisRaw("Horizontal");
-        movement.y = Input.GetAxisRaw("Vertical");
+        if (movement.x == 0)
+        {
+            movement.y = Input.GetAxisRaw("Vertical");
+        }
+        
+        //animation
+        if (movement.x > 0)
+        {
+            myAnimator.SetBool("isMovingRight", true);
+        }else if(movement.x < 0)
+        {
+            myAnimator.SetBool("isMovingLeft", true);
+        }
+        else
+        {
+            myAnimator.SetBool("isMovingLeft", false);
+            myAnimator.SetBool("isMovingRight", false);
+        }
+
+        if (movement.y > 0)
+        {
+            myAnimator.SetBool("isMovingUp", true);
+        }
+        else if (movement.y < 0)
+        {
+            myAnimator.SetBool("isMovingDown", true);
+        }
+        else
+        {
+            myAnimator.SetBool("isMovingDown", false);
+            myAnimator.SetBool("isMovingUp", false);
+        }
+
+
 
     }
 
