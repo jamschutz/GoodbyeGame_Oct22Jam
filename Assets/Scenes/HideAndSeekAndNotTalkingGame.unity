@@ -260,10 +260,10 @@ GameObject:
   - component: {fileID: 814300153}
   - component: {fileID: 814300155}
   - component: {fileID: 814300157}
-  - component: {fileID: 814300156}
+  - component: {fileID: 814300158}
   m_Layer: 0
   m_Name: gameGuy
-  m_TagString: InteractableItems
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -345,7 +345,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 1
+  m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.0022557378, y: 0.0042260885}
@@ -361,24 +361,6 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.7121079, y: 0.66321766}
   m_EdgeRadius: 0
---- !u!114 &814300156
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 814300151}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8c8cff9783541c34d80168ed871c9953, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  interacted: 0
-  pickUp: 0
-  dialogBox: 1
-  dialogContents:
-  - Hey! Let's play a game!
-  - I won!
 --- !u!61 &814300157
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -389,7 +371,7 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0.0045111775, y: 0.008452162}
@@ -405,6 +387,23 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.87902236, y: 0.8069043}
   m_EdgeRadius: 0
+--- !u!114 &814300158
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814300151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0547bb5b5c4ef4c4293f63639783719d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialog:
+  - Hey! Let's play a game!
+  - 'A game that wohever wants to play a game first win. '
+  - 'I won! '
+  - Do you want to play another game?
 --- !u!1001 &1146083855
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -632,7 +631,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1145421155889535031, guid: c576daffcca28a5489593d1250977324, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c576daffcca28a5489593d1250977324, type: 3}

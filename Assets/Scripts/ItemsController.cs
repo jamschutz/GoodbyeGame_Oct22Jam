@@ -31,17 +31,17 @@ public class ItemsController : MonoBehaviour
                 pickedUp();
             }
 
-            if (dialogBox)
+            if (dialogBox && !DialogController.instance.IsTalking())
             {
                 showDialog();
             }
-
         }
     }
 
     public void showDialog()
     {
         DialogController.instance.ShowDialog(dialogContents);
+        interacted = false;
     }
 
     public void pickedUp()
