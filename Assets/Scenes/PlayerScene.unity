@@ -123,6 +123,31 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &722325741 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4591122982772410025, guid: 9d981b37aea88844bbd6b96004d15445, type: 3}
+  m_PrefabInstance: {fileID: 4591122982156738946}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &722325742
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 722325741}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: e1e2f7f25ddbf644fbcb2d78201417ba, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &2146842662
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -313,13 +338,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4591122982772410028, guid: 9d981b37aea88844bbd6b96004d15445, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 136004922, guid: 45681e81ed6e0c3409a6afe562b1dcb4, type: 3}
     - target: {fileID: 4591122982772410029, guid: 9d981b37aea88844bbd6b96004d15445, type: 3}
       propertyPath: m_RootOrder
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4591122982772410029, guid: 9d981b37aea88844bbd6b96004d15445, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -1.191
       objectReference: {fileID: 0}
     - target: {fileID: 4591122982772410029, guid: 9d981b37aea88844bbd6b96004d15445, type: 3}
       propertyPath: m_LocalPosition.y
