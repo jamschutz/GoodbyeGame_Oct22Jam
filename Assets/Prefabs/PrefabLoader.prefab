@@ -46,24 +46,25 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   thisScenesPrefab: 3
   createCanvas: 1
+  deleteCamera: 1
   allPrefabs:
   - type: 0
     prefab: {fileID: 4591122982772410025, guid: 9d981b37aea88844bbd6b96004d15445, type: 3}
     isUi: 0
   - type: 1
-    prefab: {fileID: 0}
+    prefab: {fileID: 155651315179987539, guid: f5db57c3247fd4849887061ae9220628, type: 3}
     isUi: 0
   - type: 2
-    prefab: {fileID: 0}
+    prefab: {fileID: 7892536489386271247, guid: 2a22c32f29484a2468d46f7226f22041, type: 3}
     isUi: 0
   - type: 3
-    prefab: {fileID: 0}
+    prefab: {fileID: 3820989832221158908, guid: fbcc885cde5474940bdf22541e515c13, type: 3}
     isUi: 0
   - type: 4
     prefab: {fileID: 1145421155889535031, guid: c576daffcca28a5489593d1250977324, type: 3}
     isUi: 1
   - type: 5
-    prefab: {fileID: 0}
+    prefab: {fileID: 4222619027907915147, guid: 82fcb4301fc0a6f42b0975b2cf65b137, type: 3}
     isUi: 0
   canvas: {fileID: 7378520394073794735, guid: bb4fddc490c1c354195f110267deda3a, type: 3}
   eventSystem: {fileID: 7129096816406225153, guid: 1fdf63f83e269934ba1bf9689b43f8f7, type: 3}
