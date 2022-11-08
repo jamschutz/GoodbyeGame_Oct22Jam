@@ -22,11 +22,9 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //Input
-        movement.x = Input.GetAxisRaw("Horizontal");
-        if (movement.x == 0)
-        {
-            movement.y = Input.GetAxisRaw("Vertical");
-        }
+        if (movement.y == 0) movement.x = Input.GetAxisRaw("Horizontal");
+        if (movement.x == 0) movement.y = Input.GetAxisRaw("Vertical");
+       
         
         //animation
         if (movement.x > 0)

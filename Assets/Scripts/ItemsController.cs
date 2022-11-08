@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DialogController = UI.Controllers.DialogController;
 
 public class ItemsController : MonoBehaviour
 {
@@ -10,6 +11,9 @@ public class ItemsController : MonoBehaviour
     [Header("Types of Interaction")]
     public bool pickUp;
     public bool dialogBox;
+
+    [Header("Dialog")]
+    public string[] dialogContents;
 
     // Start is called before the first frame update
     void Start()
@@ -26,9 +30,18 @@ public class ItemsController : MonoBehaviour
             {
                 pickedUp();
             }
+
+            if (dialogBox)
+            {
+                showDialog();
+            }
+
         }
+    }
 
-
+    public void showDialog()
+    {
+        DialogController.instance.ShowDialog(dialogContents);
     }
 
     public void pickedUp()
