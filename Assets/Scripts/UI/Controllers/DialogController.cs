@@ -31,6 +31,9 @@ namespace UI.Controllers
         private bool gotInput;
         private bool isTalking;
 
+        // special strings
+        public const string PLAYER_NAME_SPECIAL = "{PLAYER_NAME}";
+
         private void Awake()
         {
             // ensure singleton instance 
@@ -69,8 +72,16 @@ namespace UI.Controllers
         }
 
 
+        public void ShowDialog(string dialog)
+        {
+            ShowDialog(new string[] { dialog });
+        }
+
+
         public void ShowDialog(string[] dialog)
         {
+            // replace special strings
+            InjectVariables(ref dialog);
             // set to dialog, and add an empty string to the end (to close the dialog out)
             currentDialog = dialog;
             StopAllCoroutines();
@@ -139,6 +150,14 @@ namespace UI.Controllers
         {
             textObj.SetActive(false);
             backgroundObj.SetActive(false);
+        }
+
+
+        private void InjectVariables(ref string[] dialog)
+        {
+            for(int i = 0; i < dialog.Length; i++) {
+                dialog[i] = dialog[i].Replace(PLAYER_NAME_SPECIAL, GameManager.PlayerName);
+            }
         }
     }
 }
