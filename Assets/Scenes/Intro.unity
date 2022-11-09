@@ -713,7 +713,11 @@ MonoBehaviour:
   - ...!
   - "It\u2019s good to see you up. I found you floating in space...can\u2019t be
     good for you!"
-  - "I\u2019m sure you have lots of questions."
+  - '{CHOICE}I''m sure you have lots of questions. {CHOICES: How did I get here?
+    | What is this place? }'
+  - "{DECISIONS: Oh, I just plucked you out with the crane arm. Come on, I\u2019ll
+    show it to you. | This is the command center! Let me show you the crane arm I
+    picked you up with. }"
 --- !u!1 &184138064
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +976,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &341506699
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1542,7 +1546,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &688986551
 Transform:
   m_ObjectHideFlags: 0
@@ -2400,7 +2404,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1798106900
 Transform:
   m_ObjectHideFlags: 0
