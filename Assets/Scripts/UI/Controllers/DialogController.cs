@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Utils;
 
 
 namespace UI.Controllers
@@ -31,13 +32,7 @@ namespace UI.Controllers
         private bool gotInput;
         private bool isTalking;
         private bool isMakingChoice;
-
-        // special strings
-        public const string PLAYER_NAME_SPECIAL = "{PLAYER_NAME}";
-        public const string NEW_LINE_SPECIAL = "{NEW_LINE}";
-        public const string CHOICE_DECLARATION = "{CHOICE}";
-        public const string CHOICE_OPTIONS_DECLARATION = "{CHOICES: ";
-        public const string DECISIONS_DECLARATION = "{DECISIONS: ";
+        private int lastChoice;
 
         private void Awake()
         {
@@ -72,9 +67,30 @@ namespace UI.Controllers
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Space)) {
+            // check for number keys
+            if(isMakingChoice) {
+                // default got input to true (we'll correct in else statement)
+                gotInput = true;
+
+                // check number keys registered...
+                if(Input.GetKeyDown("1"))      lastChoice = 1;
+                else if(Input.GetKeyDown("2")) lastChoice = 2;
+                else if(Input.GetKeyDown("3")) lastChoice = 3;
+                else if(Input.GetKeyDown("4")) lastChoice = 4;
+                else if(Input.GetKeyDown("5")) lastChoice = 5;
+                else if(Input.GetKeyDown("6")) lastChoice = 6;
+                else if(Input.GetKeyDown("7")) lastChoice = 7;
+                else if(Input.GetKeyDown("8")) lastChoice = 8;
+                else if(Input.GetKeyDown("9")) lastChoice = 9;
+
+                // register no input this frame
+                else gotInput = false;
+            }
+            // check for space
+            else if(Input.GetKeyDown(KeyCode.Space)) {
                 gotInput = true;
             }
+            
         }
 
 
@@ -87,7 +103,7 @@ namespace UI.Controllers
         public void ShowDialog(string[] dialog)
         {
             // replace special strings
-            InjectVariables(ref dialog);
+            DialogUtils.InjectVariables(ref dialog);
             // set to dialog, and add an empty string to the end (to close the dialog out)
             currentDialog = dialog;
             StopAllCoroutines();
@@ -116,27 +132,13 @@ namespace UI.Controllers
                 string correctedLine = line;
 
                 // check if it's a choice...
-                if(IsChoice(line)) {
-                    // remove choice declaration
-                    correctedLine = line.Replace(CHOICE_DECLARATION, "");
-
-                    // find the {CHOICES: 1 | 2} index bounds
-                    int choiceStart = correctedLine.IndexOf(CHOICE_OPTIONS_DECLARATION) + CHOICE_OPTIONS_DECLARATION.Length;
-                    int choiceEnd = correctedLine.IndexOf("}",choiceStart);
-
-                    Debug.Log($"choicestart: {choiceStart}....first part: {correctedLine.Substring(0,choiceStart)}; second part: {correctedLine.Substring(choiceStart)}");
-                    
-                    // grab just the "1 | 2" from the above
-                    string rawChoices = correctedLine.Substring(choiceStart, choiceEnd - choiceStart);
-                    // separate choices into strings
-                    string[] choices = rawChoices.Split(" | ");
-
-                    // combine everything
-                    correctedLine = correctedLine.Substring(0, choiceStart - CHOICE_OPTIONS_DECLARATION.Length) + "\n";
-                    // show options
-                    for(int i = 0; i < choices.Length; i++) {
-                        correctedLine += $"\n{i + 1}: {choices[i]}";
-                    }
+                isMakingChoice = DialogUtils.IsChoice(line);
+                if(isMakingChoice) {
+                    correctedLine = DialogUtils.GetCorrectedChoiceLine(line);
+                }
+                // check if decisions list
+                else if(DialogUtils.IsDecisionList(line)) {
+                    correctedLine = DialogUtils.GetChoice(lastChoice, line);
                 }
 
                 // type out each letter
@@ -181,21 +183,6 @@ namespace UI.Controllers
         {
             textObj.SetActive(false);
             backgroundObj.SetActive(false);
-        }
-
-
-        private void InjectVariables(ref string[] dialog)
-        {
-            for(int i = 0; i < dialog.Length; i++) {
-                dialog[i] = dialog[i].Replace(PLAYER_NAME_SPECIAL, GameManager.PlayerName);
-                dialog[i] = dialog[i].Replace(NEW_LINE_SPECIAL, "\n");
-            }
-        }
-
-
-        private bool IsChoice(string dialog)
-        {
-            return dialog.Substring(0,CHOICE_DECLARATION.Length) == CHOICE_DECLARATION;
         }
     }
 }
