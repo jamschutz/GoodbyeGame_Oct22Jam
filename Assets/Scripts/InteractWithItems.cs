@@ -35,11 +35,14 @@ public class InteractWithItems : MonoBehaviour
         if (collision.tag == "InteractableItems" && pressedInteractKey)
         {
             collision.gameObject.GetComponent<ItemsController>().interacted = true;
+            Debug.Log("interacted");
+            pressedInteractKey = false;
         }
 
         if (collision.name == "AI Generater" && pressedInteractKey)
         {
             collision.gameObject.GetComponent<AIGenerator>().interacted = true;
+            pressedInteractKey = false;
         }
 
     }

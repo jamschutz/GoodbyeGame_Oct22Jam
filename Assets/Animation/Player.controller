@@ -62,7 +62,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 1
-    m_ConditionEvent: inMovingDown
+    m_ConditionEvent: isMovingDown
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -9045503682087093772}
@@ -87,7 +87,7 @@ AnimatorStateTransition:
   m_Name: 
   m_Conditions:
   - m_ConditionMode: 2
-    m_ConditionEvent: inMovingDown
+    m_ConditionEvent: isMovingDown
     m_EventTreshold: 0
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: -7325696836627154774}
@@ -242,7 +242,7 @@ AnimatorController:
   m_Name: Player
   serializedVersion: 5
   m_AnimatorParameters:
-  - m_Name: inMovingDown
+  - m_Name: isMovingDown
     m_Type: 4
     m_DefaultFloat: 0
     m_DefaultInt: 0
