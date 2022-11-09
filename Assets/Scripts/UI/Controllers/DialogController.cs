@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Utils;
 
 
 namespace UI.Controllers
@@ -30,6 +31,8 @@ namespace UI.Controllers
         // input helpers
         private bool gotInput;
         private bool isTalking;
+        private bool isMakingChoice;
+        private int lastChoice;
 
         private void Awake()
         {
@@ -55,6 +58,7 @@ namespace UI.Controllers
             text.text = "";
             transform.localPosition = new Vector3(0, yPos, 0);
             isTalking = false;
+            isMakingChoice = false;
 
             // hide box
             HideDialogBox();
@@ -63,14 +67,43 @@ namespace UI.Controllers
 
         private void Update()
         {
-            if(Input.GetKeyDown(KeyCode.Space)) {
+            // check for number keys
+            if(isMakingChoice) {
+                // default got input to true (we'll correct in else statement)
+                gotInput = true;
+
+                // check number keys registered...
+                if(Input.GetKeyDown("1"))      lastChoice = 1;
+                else if(Input.GetKeyDown("2")) lastChoice = 2;
+                else if(Input.GetKeyDown("3")) lastChoice = 3;
+                else if(Input.GetKeyDown("4")) lastChoice = 4;
+                else if(Input.GetKeyDown("5")) lastChoice = 5;
+                else if(Input.GetKeyDown("6")) lastChoice = 6;
+                else if(Input.GetKeyDown("7")) lastChoice = 7;
+                else if(Input.GetKeyDown("8")) lastChoice = 8;
+                else if(Input.GetKeyDown("9")) lastChoice = 9;
+
+                // register no input this frame
+                else gotInput = false;
+            }
+            // check for space
+            else if(Input.GetKeyDown(KeyCode.Space)) {
                 gotInput = true;
             }
+            
+        }
+
+
+        public void ShowDialog(string dialog)
+        {
+            ShowDialog(new string[] { dialog });
         }
 
 
         public void ShowDialog(string[] dialog)
         {
+            // replace special strings
+            DialogUtils.InjectVariables(ref dialog);
             // set to dialog, and add an empty string to the end (to close the dialog out)
             currentDialog = dialog;
             StopAllCoroutines();
@@ -96,9 +129,20 @@ namespace UI.Controllers
             foreach(var line in currentDialog) {
                 // reset text
                 text.text = "";
+                string correctedLine = line;
+
+                // check if it's a choice...
+                isMakingChoice = DialogUtils.IsChoice(line);
+                if(isMakingChoice) {
+                    correctedLine = DialogUtils.GetCorrectedChoiceLine(line);
+                }
+                // check if decisions list
+                else if(DialogUtils.IsDecisionList(line)) {
+                    correctedLine = DialogUtils.GetChoice(lastChoice, line);
+                }
 
                 // type out each letter
-                foreach(var c in line) {
+                foreach(var c in correctedLine) {
                     text.text += c;
 
                     // if player presses space this frame, just show the rest of the line
