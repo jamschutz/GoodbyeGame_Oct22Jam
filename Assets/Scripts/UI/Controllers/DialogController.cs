@@ -30,9 +30,14 @@ namespace UI.Controllers
         // input helpers
         private bool gotInput;
         private bool isTalking;
+        private bool isMakingChoice;
 
         // special strings
         public const string PLAYER_NAME_SPECIAL = "{PLAYER_NAME}";
+        public const string NEW_LINE_SPECIAL = "{NEW_LINE}";
+        public const string CHOICE_DECLARATION = "{CHOICE}";
+        public const string CHOICE_OPTIONS_DECLARATION = "{CHOICES: ";
+        public const string DECISIONS_DECLARATION = "{DECISIONS: ";
 
         private void Awake()
         {
@@ -58,6 +63,7 @@ namespace UI.Controllers
             text.text = "";
             transform.localPosition = new Vector3(0, yPos, 0);
             isTalking = false;
+            isMakingChoice = false;
 
             // hide box
             HideDialogBox();
@@ -107,9 +113,34 @@ namespace UI.Controllers
             foreach(var line in currentDialog) {
                 // reset text
                 text.text = "";
+                string correctedLine = line;
+
+                // check if it's a choice...
+                if(IsChoice(line)) {
+                    // remove choice declaration
+                    correctedLine = line.Replace(CHOICE_DECLARATION, "");
+
+                    // find the {CHOICES: 1 | 2} index bounds
+                    int choiceStart = correctedLine.IndexOf(CHOICE_OPTIONS_DECLARATION) + CHOICE_OPTIONS_DECLARATION.Length;
+                    int choiceEnd = correctedLine.IndexOf("}",choiceStart);
+
+                    Debug.Log($"choicestart: {choiceStart}....first part: {correctedLine.Substring(0,choiceStart)}; second part: {correctedLine.Substring(choiceStart)}");
+                    
+                    // grab just the "1 | 2" from the above
+                    string rawChoices = correctedLine.Substring(choiceStart, choiceEnd - choiceStart);
+                    // separate choices into strings
+                    string[] choices = rawChoices.Split(" | ");
+
+                    // combine everything
+                    correctedLine = correctedLine.Substring(0, choiceStart - CHOICE_OPTIONS_DECLARATION.Length) + "\n";
+                    // show options
+                    for(int i = 0; i < choices.Length; i++) {
+                        correctedLine += $"\n{i + 1}: {choices[i]}";
+                    }
+                }
 
                 // type out each letter
-                foreach(var c in line) {
+                foreach(var c in correctedLine) {
                     text.text += c;
 
                     // if player presses space this frame, just show the rest of the line
@@ -157,7 +188,14 @@ namespace UI.Controllers
         {
             for(int i = 0; i < dialog.Length; i++) {
                 dialog[i] = dialog[i].Replace(PLAYER_NAME_SPECIAL, GameManager.PlayerName);
+                dialog[i] = dialog[i].Replace(NEW_LINE_SPECIAL, "\n");
             }
+        }
+
+
+        private bool IsChoice(string dialog)
+        {
+            return dialog.Substring(0,CHOICE_DECLARATION.Length) == CHOICE_DECLARATION;
         }
     }
 }
