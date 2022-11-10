@@ -18,11 +18,23 @@ namespace AI
 
         private List<NavMeshVertex> vertices;
 
+
+        // ========================================================== //
+        // ===========    Lifecycle Methods                ========== //
+        // ========================================================== //
+
         private void Start()
         {
             InitVertices();
             ShowVertices();
         }
+
+
+
+
+        // ========================================================== //
+        // ===========    Main Methods                     ========== //
+        // ========================================================== //
 
 
         private void InitVertices()
@@ -46,21 +58,19 @@ namespace AI
         }
 
 
-        private void ShowVertices()
-        {
-            foreach(var v in vertices) {
-                var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                obj.transform.position = v.position;
-            }
-        }
-
-
         public Vector3[] GetPathBetweenPoints(Vector3 start, Vector3 end)
         {
             var path = new List<Vector3>();
 
             return path.ToArray();
         }
+
+
+
+
+        // ========================================================== //
+        // ===========    Helper Methods                   ========== //
+        // ========================================================== //
 
 
         private Vector2 GetStart()
@@ -92,6 +102,15 @@ namespace AI
             float bottom = center.y + (collider.size.y * 0.5f);
 
             return new Vector2(right, bottom);
+        }
+
+
+        private void ShowVertices()
+        {
+            foreach(var v in vertices) {
+                var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                obj.transform.position = v.position;
+            }
         }
     }
 }
