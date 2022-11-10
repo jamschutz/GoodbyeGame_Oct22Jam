@@ -147,7 +147,7 @@ namespace UI.Controllers
 
                     // if player presses space this frame, just show the rest of the line
                     if(gotInput) {
-                        text.text = line;
+                        text.text = correctedLine;
 
                         // wipe input flag so it doesn't get reused
                         gotInput = false;
