@@ -44,7 +44,7 @@ namespace AI
         private void ShowVertices()
         {
             foreach(var v in vertices) {
-                GameObject.Instantiate(PrimitiveType.Cube, v.position, Quaternion.identity);
+                // GameObject.Instantiate(PrimitiveType.Cube, v.position, Quaternion.identity);
             }
         }
 
