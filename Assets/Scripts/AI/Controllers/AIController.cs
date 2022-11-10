@@ -30,7 +30,6 @@ namespace AI.Controller
         {
             // if we're too close, don't move
             if(Vector2.Distance(currentTarget.position, transform.position) <= followDistance) {
-                Debug.Log("too close!!!");
                 return;
             }
 
