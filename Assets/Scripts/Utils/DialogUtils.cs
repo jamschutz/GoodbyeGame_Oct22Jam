@@ -13,12 +13,14 @@ public static class DialogUtils
 
     public static bool IsChoice(string dialog)
     {
+        if(dialog.Length < CHOICE_DECLARATION.Length) return false;
         return dialog.Substring(0,CHOICE_DECLARATION.Length) == CHOICE_DECLARATION;
     }
 
 
     public static bool IsDecisionList(string dialog)
     {
+        if(dialog.Length < DECISIONS_DECLARATION.Length) return false;
         return dialog.Substring(0,DECISIONS_DECLARATION.Length) == DECISIONS_DECLARATION;
     }
 

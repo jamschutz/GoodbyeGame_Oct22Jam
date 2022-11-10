@@ -6,8 +6,8 @@ namespace AI.Controller
 {
     public class AIController : MonoBehaviour
     {
-        public enum State { Idle, FollowPlayer }
-
+        public enum State { Idle, FollowPlayer, FollowTarget }
+        
         [Header("Movement")]
         public float moveSpeed;
         public float followDistance;
@@ -30,7 +30,6 @@ namespace AI.Controller
         {
             // if we're too close, don't move
             if(Vector2.Distance(currentTarget.position, transform.position) <= followDistance) {
-                Debug.Log("too close!!!");
                 return;
             }
 

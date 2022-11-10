@@ -713,7 +713,26 @@ MonoBehaviour:
   - ...!
   - "It\u2019s good to see you up. I found you floating in space...can\u2019t be
     good for you!"
-  - "I\u2019m sure you have lots of questions."
+  - '{CHOICE}I''m sure you have lots of questions. {CHOICES: How did I get here?
+    | What is this place? }'
+  - "{DECISIONS: Oh, I just plucked you out with the crane arm. Come on, I\u2019ll
+    show it to you. | This is the command center! Let me show you the crane arm I
+    picked you up with. }"
+  eventOnDialogFinish:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1472859975}
+        m_TargetAssemblyTypeName: AI.Controller.CaptainController, Assembly-CSharp
+        m_MethodName: FollowTarget
+        m_Mode: 2
+        m_Arguments:
+          m_ObjectArgument: {fileID: 269883908}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Transform, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!1 &184138064
 GameObject:
   m_ObjectHideFlags: 0
@@ -821,6 +840,37 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4591122982772410029, guid: 9d981b37aea88844bbd6b96004d15445, type: 3}
   m_PrefabInstance: {fileID: 86018916}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &269883907
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 269883908}
+  m_Layer: 0
+  m_Name: CraneRoomTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &269883908
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 269883907}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.1, y: -69.6, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 868636264}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &281160094
 GameObject:
   m_ObjectHideFlags: 0
@@ -972,7 +1022,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &341506699
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1542,7 +1592,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &688986551
 Transform:
   m_ObjectHideFlags: 0
@@ -1903,6 +1953,38 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e65c604cdacb20344afd658189b53511, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &868636263
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 868636264}
+  m_Layer: 0
+  m_Name: CaptainWaypoints
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &868636264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 868636263}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 269883908}
+  m_Father: {fileID: 1798106900}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &921885260
 GameObject:
   m_ObjectHideFlags: 0
@@ -2091,6 +2173,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078296638}
   m_CullTransparentMesh: 1
+--- !u!114 &1472859975 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1926952451, guid: f5db57c3247fd4849887061ae9220628, type: 3}
+  m_PrefabInstance: {fileID: 1982739011}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95d29912fe9060b46ad30e6505632d5b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1568806849
 GameObject:
   m_ObjectHideFlags: 0
@@ -2400,7 +2493,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1798106900
 Transform:
   m_ObjectHideFlags: 0
@@ -2417,6 +2510,7 @@ Transform:
   - {fileID: 192296181}
   - {fileID: 486079369}
   - {fileID: 164964635}
+  - {fileID: 868636264}
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2583,6 +2677,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1798106900}
     m_Modifications:
+    - target: {fileID: 1926952451, guid: f5db57c3247fd4849887061ae9220628, type: 3}
+      propertyPath: moveSpeed
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 1926952451, guid: f5db57c3247fd4849887061ae9220628, type: 3}
       propertyPath: startingState
       value: 0

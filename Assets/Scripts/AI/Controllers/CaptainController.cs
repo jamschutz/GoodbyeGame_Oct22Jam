@@ -23,12 +23,33 @@ namespace AI.Controller
                     // do nothing
                     break;
                 case State.FollowPlayer:
+                case State.FollowTarget:
                     MoveTowardsTarget();
                     break;
                 default:
                     Debug.LogError($"{gameObject.name} is in unknown state: {state.ToString()}");
                     break;
             }
+        }
+
+
+        public void FollowTarget(Transform target)
+        {
+            state = State.FollowTarget;
+            currentTarget = target;
+        }
+
+
+        public void FollowPlayer()
+        {
+            state = State.FollowPlayer;
+            currentTarget = player;
+        }
+
+
+        public void GoIdle()
+        {
+            state = State.Idle;
         }
     }
 
