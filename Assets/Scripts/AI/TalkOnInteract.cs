@@ -33,6 +33,17 @@ namespace AI
             }
         }
 
+
+        public void SetDialog(string newDialog)
+        {
+            SetDialog(new string[] { newDialog });
+        }
+
+        public void SetDialog(string[] newDialog)
+        {
+            dialog = newDialog;
+        }
+
     
         private void OnTriggerEnter2D(Collider2D collision)
         {
