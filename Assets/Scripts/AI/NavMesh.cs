@@ -13,7 +13,7 @@ namespace AI
         public float width;
 
         [Header("Editor")]
-        public float gizmoRadius = 1;
+        public bool showGrid = false;
 
 
         private List<NavMeshVertex> vertices;
@@ -31,15 +31,18 @@ namespace AI
         }
 
 
+#if UNITY_EDITOR
         private void Update()
         {
+            if(!showGrid) return;
+
             foreach(var vertex in vertices) {
                 foreach(var neighbor in vertex.neighbors) {
-                    Debug.DrawLine(vertex.position, neighbor.position, Color.red, 1);
+                    Debug.DrawLine(vertex.position, neighbor.position, Color.red, 0.1f);
                 }
             }
         }
-
+#endif
 
 
 
