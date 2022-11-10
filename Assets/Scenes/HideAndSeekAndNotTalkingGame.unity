@@ -261,8 +261,9 @@ GameObject:
   - component: {fileID: 814300155}
   - component: {fileID: 814300157}
   - component: {fileID: 814300158}
+  - component: {fileID: 814300159}
   m_Layer: 0
-  m_Name: gameGuy
+  m_Name: gameRobot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -408,9 +409,23 @@ MonoBehaviour:
   - '{DECISIONS: It''s a game where whoever talks to each other first loses.  | {END_DIALOG}}'
   - Be careful. I am really good at this game.
   - '{CHOICE}Ok! Game starts! {CHOICES: I''ll beat you | (not say anything) }'
-  - '{DECISIONS: You lose!  | {END_DIALOG}}'
+  - '{DECISIONS: You lose!  | {SET_FLAG:DoneIntro}{END_DIALOG}}'
   - 'Haha I told you I am really good at it. '
   - Ok let's play again! Game starts!
+  - '{SET_FLAG:DoneIntro}{END_DIALOG}'
+--- !u!114 &814300159
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 814300151}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 04808a3e10eed5445ab1d7258bb0a4f9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doneIntro: 0
 --- !u!1001 &1146083855
 PrefabInstance:
   m_ObjectHideFlags: 0
