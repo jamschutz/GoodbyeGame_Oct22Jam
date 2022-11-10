@@ -21,6 +21,7 @@ namespace AI
         private void Start()
         {
             InitVertices();
+            ShowVertices();
         }
 
 
@@ -30,21 +31,28 @@ namespace AI
             Vector2 start = transform.position;
             Vector2 end = start + new Vector2(width, height);
 
+            Debug.Log($"start: {start.ToString()},   end: {end.ToString()}");
+
             // create vertices
             vertices = new List<NavMeshVertex>();
             for(float x = start.x; x < end.x; x += distanceBetweenVertices) {
                 for(float y = start.y; y < end.y; y += distanceBetweenVertices) {
+                    Debug.Log($"at ({x}, {y})");
                     var vertex = new NavMeshVertex();
                     vertex.position = new Vector2(x, y);
                 }
             }
+
+            Debug.Log($"created {vertices.Count} vertices");
         }
 
 
         private void ShowVertices()
         {
             foreach(var v in vertices) {
-                // GameObject.Instantiate(PrimitiveType.Cube, v.position, Quaternion.identity);
+                var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                obj.transform.position = v.position;
+                Debug.Log($"created object at {v.position.ToString()}");
             }
         }
 

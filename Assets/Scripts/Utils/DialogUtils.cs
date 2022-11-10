@@ -10,6 +10,7 @@ public static class DialogUtils
     public const string CHOICE_DECLARATION = "{CHOICE}";
     public const string CHOICE_OPTIONS_DECLARATION = "{CHOICES: ";
     public const string DECISIONS_DECLARATION = "{DECISIONS: ";
+    public const string END_DIALOG_SPECIAL = "{END_DIALOG}";
 
     public static bool IsChoice(string dialog)
     {
@@ -22,6 +23,14 @@ public static class DialogUtils
     {
         if(dialog.Length < DECISIONS_DECLARATION.Length) return false;
         return dialog.Substring(0,DECISIONS_DECLARATION.Length) == DECISIONS_DECLARATION;
+    }
+
+
+    public static bool IsEndDialog(string dialog)
+    {
+        dialog = dialog.Trim();
+        if(dialog.Length < END_DIALOG_SPECIAL.Length) return false;
+        return dialog.Substring(0,END_DIALOG_SPECIAL.Length) == END_DIALOG_SPECIAL;
     }
 
 
@@ -46,7 +55,7 @@ public static class DialogUtils
             correctedLine += $"\n{i + 1}: {choices[i].Trim()}";
         }
 
-        return correctedLine;
+        return correctedLine.Trim();
     }
 
 
@@ -68,7 +77,9 @@ public static class DialogUtils
         }
 
         // remove decision declaration
-        dialog = dialog.Replace(DECISIONS_DECLARATION, "").Replace("}","");
+        dialog = dialog.Replace(DECISIONS_DECLARATION, "");
+        // remove trailing "}"
+        dialog = dialog.Substring(0, dialog.Length - 1);
         
         // split into decisions list
         var decisions = dialog.Split("|");
