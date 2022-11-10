@@ -64,3 +64,48 @@ private void Start()
     DialogController.instance.ShowDialog(dialog);
 }
 ```
+
+### Using dialog flags
+At any point in your dialog, you can declare flags to track what a player has seen. You can name the flags anything you want. Let's look at an example!<br/><br/>
+
+```
+{CHOICE}How are you feeling? {CHOICES: Good | Bad}
+{DECISIONS: I'm glad | Oh no! {SET_FLAG:FeelsBad}}
+```
+<br/>
+In the example above, we asked a player how they felt, and gave them 2 options: "Good" or "Bad." Then, in the following line of dialog, we branch based on their response. Using the `SET_FLAG` tag, we set the custom flag "FeelsBad" for the Bad branch. That way, we can later check if a player said they felt bad or not.
+
+<br/> 
+Here's some code to check a flag (NOTE: You can name flags anything you want!)
+<br/>
+
+```C#
+using DialogController = UI.Controllers.DialogController;
+
+private void Start()
+{
+    // query dialog controller to see if the player has seen the "FeelsBad" tag
+    bool playerFeelsBad = DialogController.instance.HasSeenFlag("FeelsBad");
+    
+    if(playerFeelsBad) {
+        // do something...
+    }
+}
+```
+
+### Ending dialog early
+In your branching dialog, you might have some paths end sooner than others. To end dialog early, you can use the `{END_DIALOG}` tag. For example:
+<br/>
+```
+Here is the command center!
+{CHOICE}Would you like to hear more about it {CHOICES: Yes | No}
+{DECISIONS: It's really cool. | {END_DIALOG}}
+```
+<br/>
+In the example above, the NPC asks the player if they want to hear more -- if they say "Yes", they say a little more. But if the player says "No" then the dialog will end immediately. 
+
+<br/>
+NOTE: You can set flags in the same branch you end dialog in! for example:
+```
+{DECISIONS: It's really cool. | {SET_FLAG:NotInterested}{END_DIALOG}}
+```
