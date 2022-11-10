@@ -37,9 +37,12 @@ namespace AI
             vertices = new List<NavMeshVertex>();
             for(float x = start.x; x < end.x; x += distanceBetweenVertices) {
                 for(float y = start.y; y < end.y; y += distanceBetweenVertices) {
-                    Debug.Log($"at ({x}, {y})");
+                    // create vertex at (x, y)
                     var vertex = new NavMeshVertex();
                     vertex.position = new Vector2(x, y);
+
+                    // add to list
+                    vertices.Add(vertex);
                 }
             }
 
