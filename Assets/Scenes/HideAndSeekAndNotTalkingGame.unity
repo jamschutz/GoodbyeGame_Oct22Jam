@@ -400,10 +400,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dialog:
-  - Hey! Let's play a game!
+  - 'Hey! Let''s play a game! '
   - 'A game that wohever wants to play a game first win. '
-  - 'I won! '
-  - Do you want to play another game?
+  - I won!
+  - '{CHOICE}Do you want to play another game? {CHOICES: Yes | No }'
+  - '{DECISIONS: Nice | Oh no}'
+  - '{DECISIONS: It''s a game where whoever talks to each other first loses.  | {END_DIALOG}}'
+  - Be careful. I am really good at this game.
+  - '{CHOICE}Ok! Game starts! {CHOICES: I''ll beat you | (not say anything) }'
+  - '{DECISIONS: You lose!  | {END_DIALOG}}'
+  - 'Haha I told you I am really good at it. '
+  - Ok let's play again! Game starts!
 --- !u!1001 &1146083855
 PrefabInstance:
   m_ObjectHideFlags: 0
