@@ -54,17 +54,11 @@ namespace AI
             Vector2 start = GetStart();
             Vector2 end = GetEnd();
 
-            Debug.Log($"start: {start.ToString()},   end: {end.ToString()}");
-
             // create vertices
             vertices = new List<NavMeshVertex>();
             for(float x = start.x; x < end.x; x += distanceBetweenVertices) {
                 for(float y = start.y; y < end.y; y += distanceBetweenVertices) {
-<<<<<<< HEAD
                     // create vertex at (x, y)
-=======
-                    Debug.Log($"at ({x}, {y})");
->>>>>>> e584d29c99cb97e3889e12af003dd5a4d018064b
                     var vertex = new NavMeshVertex();
                     vertex.position = new Vector2(x, y);
 
@@ -72,14 +66,11 @@ namespace AI
                     vertices.Add(vertex);
                 }
             }
-
-            Debug.Log($"created {vertices.Count} vertices");
         }
 
 
         private void BuildVertexConnections()
         {
-<<<<<<< HEAD
             // for each vertex...
             foreach(var vertex in vertices) {
                 // look at every other vertex
@@ -92,16 +83,15 @@ namespace AI
 
                     // otherwise, check if it's within max distance of us
                     if(distance < distanceBetweenVertices + 0.2f) {
-                        // and if so, register neighbor
-                        vertex.neighbors.Add(other);
+                        // check for things blocking the path...
+                        var hit = Physics2D.Raycast(vertex.position, (other.position - vertex.position).normalized, distanceBetweenVertices, Utils.Globals.NavigationLayer);
+
+                        // if nothing in between, register as neighbor
+                        if(hit.transform == null) {
+                            vertex.neighbors.Add(other);
+                        }
                     }
                 }
-=======
-            foreach(var v in vertices) {
-                var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                obj.transform.position = v.position;
-                Debug.Log($"created object at {v.position.ToString()}");
->>>>>>> e584d29c99cb97e3889e12af003dd5a4d018064b
             }
         }
 
@@ -128,10 +118,8 @@ namespace AI
             var center = new Vector2(transform.position.x, transform.position.y) + collider.offset;
 
             // get bounds
-            float left  = center.x - (collider.size.x * 0.5f);
-            float right = center.x + (collider.size.x * 0.5f);
-            float top    = center.y - (collider.size.y * 0.5f);
-            float bottom = center.y + (collider.size.y * 0.5f);
+            float left = center.x - (collider.size.x * 0.5f);
+            float top = center.y - (collider.size.y * 0.5f);
 
             return new Vector2(left, top);
         }
@@ -144,9 +132,7 @@ namespace AI
             var center = new Vector2(transform.position.x, transform.position.y) + collider.offset;
 
             // get bounds
-            float left  = center.x - (collider.size.x * 0.5f);
             float right = center.x + (collider.size.x * 0.5f);
-            float top    = center.y - (collider.size.y * 0.5f);
             float bottom = center.y + (collider.size.y * 0.5f);
 
             return new Vector2(right, bottom);
