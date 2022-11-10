@@ -371,7 +371,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialog:
   - '{CHOICE}How are you feeling? {CHOICES: Good | Bad}'
-  - '{DECISIONS: I''m glad | {END_DIALOG}}'
+  - '{DECISIONS: I''m glad | Oh no! {SET_FLAG:someVariable}}'
   eventOnDialogFinish:
     m_PersistentCalls:
       m_Calls: []

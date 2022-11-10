@@ -19,6 +19,9 @@ namespace UI.Controllers
         // singleton instance
         public static DialogController instance;
 
+        // public variables
+        private HashSet<string> flagsSeen { get; set; }
+
         // private TMP variables
         private TMP_Text text;
         private string[] currentDialog;
@@ -59,6 +62,7 @@ namespace UI.Controllers
             transform.localPosition = new Vector3(0, yPos, 0);
             isTalking = false;
             isMakingChoice = false;
+            flagsSeen = new HashSet<string>();
 
             // hide box
             HideDialogBox();
@@ -91,6 +95,12 @@ namespace UI.Controllers
                 gotInput = true;
             }
             
+        }
+
+
+        public bool HasSeenFlag(string flag)
+        {
+            return flagsSeen.Contains(flag);
         }
 
 
@@ -140,6 +150,16 @@ namespace UI.Controllers
                 else if(DialogUtils.IsDecisionList(line)) {
                     correctedLine = DialogUtils.GetChoice(lastChoice, line);
                 }
+                
+                // check for any flags
+                string flag = DialogUtils.StripFlags(ref correctedLine);
+                if(flag != null) {
+                    if(!flagsSeen.Contains(flag)) {
+                        Debug.Log($"got flag: {flag}");
+                        flagsSeen.Add(flag);
+                    }
+                }
+
                 // check if we should end the conversation
                 if(DialogUtils.IsEndDialog(correctedLine)) {
                     break;

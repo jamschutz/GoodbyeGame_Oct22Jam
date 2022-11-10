@@ -54,8 +54,6 @@ namespace AI
             Vector2 start = GetStart();
             Vector2 end = GetEnd();
 
-            Debug.Log($"start: {start.ToString()},   end: {end.ToString()}");
-
             // create vertices
             vertices = new List<NavMeshVertex>();
             for(float x = start.x; x < end.x; x += distanceBetweenVertices) {
@@ -68,8 +66,6 @@ namespace AI
                     vertices.Add(vertex);
                 }
             }
-
-            Debug.Log($"created {vertices.Count} vertices");
         }
 
 
@@ -87,8 +83,13 @@ namespace AI
 
                     // otherwise, check if it's within max distance of us
                     if(distance < distanceBetweenVertices + 0.2f) {
-                        // and if so, register neighbor
-                        vertex.neighbors.Add(other);
+                        // check for things blocking the path...
+                        var hit = Physics2D.Raycast(vertex.position, (other.position - vertex.position).normalized, distanceBetweenVertices, Utils.Globals.NavigationLayer);
+
+                        // if nothing in between, register as neighbor
+                        if(hit.transform == null) {
+                            vertex.neighbors.Add(other);
+                        }
                     }
                 }
             }
@@ -117,10 +118,8 @@ namespace AI
             var center = new Vector2(transform.position.x, transform.position.y) + collider.offset;
 
             // get bounds
-            float left  = center.x - (collider.size.x * 0.5f);
-            float right = center.x + (collider.size.x * 0.5f);
-            float top    = center.y - (collider.size.y * 0.5f);
-            float bottom = center.y + (collider.size.y * 0.5f);
+            float left = center.x - (collider.size.x * 0.5f);
+            float top = center.y - (collider.size.y * 0.5f);
 
             return new Vector2(left, top);
         }
@@ -133,9 +132,7 @@ namespace AI
             var center = new Vector2(transform.position.x, transform.position.y) + collider.offset;
 
             // get bounds
-            float left  = center.x - (collider.size.x * 0.5f);
             float right = center.x + (collider.size.x * 0.5f);
-            float top    = center.y - (collider.size.y * 0.5f);
             float bottom = center.y + (collider.size.y * 0.5f);
 
             return new Vector2(right, bottom);
