@@ -7,11 +7,13 @@ using DialogController = UI.Controllers.DialogController;
 public class gameRobotDialogManager : MonoBehaviour
 {
     public bool doneIntro;
+    public AI.TalkOnInteract myDialogManager;
+    public string[] dialog01;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        myDialogManager = GetComponent<AI.TalkOnInteract>();
     }
 
     // Update is called once per frame
@@ -20,7 +22,7 @@ public class gameRobotDialogManager : MonoBehaviour
         doneIntro = DialogController.instance.HasSeenFlag("DoneIntro");
         if (doneIntro)
         {
-            //GetComponent<TalkOnInteract>().enabled = false;
+            myDialogManager.SetDialog(dialog01);
         }
 
     }

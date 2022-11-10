@@ -426,6 +426,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   doneIntro: 0
+  myDialogManager: {fileID: 0}
+  dialog01:
+  - '{CHOICE}...... {CHOICES: What''s your name? | (not say anything) }'
+  - '{DECISIONS: You lose!  | {END_DIALOG}}'
+  - 'Haha you need to practice more! '
+  - ......
+  - My name is Hogarth by the way
+  - Let's play again! Game starts!
+  - '{SET_FLAG:FinishedD1}{END_DIALOG}'
 --- !u!1001 &1146083855
 PrefabInstance:
   m_ObjectHideFlags: 0
