@@ -60,11 +60,7 @@ namespace AI
             vertices = new List<NavMeshVertex>();
             for(float x = start.x; x < end.x; x += distanceBetweenVertices) {
                 for(float y = start.y; y < end.y; y += distanceBetweenVertices) {
-<<<<<<< HEAD
                     // create vertex at (x, y)
-=======
-                    Debug.Log($"at ({x}, {y})");
->>>>>>> e584d29c99cb97e3889e12af003dd5a4d018064b
                     var vertex = new NavMeshVertex();
                     vertex.position = new Vector2(x, y);
 
@@ -79,7 +75,6 @@ namespace AI
 
         private void BuildVertexConnections()
         {
-<<<<<<< HEAD
             // for each vertex...
             foreach(var vertex in vertices) {
                 // look at every other vertex
@@ -96,12 +91,6 @@ namespace AI
                         vertex.neighbors.Add(other);
                     }
                 }
-=======
-            foreach(var v in vertices) {
-                var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                obj.transform.position = v.position;
-                Debug.Log($"created object at {v.position.ToString()}");
->>>>>>> e584d29c99cb97e3889e12af003dd5a4d018064b
             }
         }
 
