@@ -27,7 +27,6 @@ namespace AI
         {
             InitVertices();
             BuildVertexConnections();
-            // ShowVertices();
         }
 
 
@@ -103,6 +102,14 @@ namespace AI
         {
             var path = new List<Vector3>();
 
+            // get vertices nearest start and end
+            float bestDistance = 1000000;
+            Vector3 startingVertex;
+            foreach(var v in vertices) {
+                // startingVertex = Vector2.Distance(start, v.position
+            }
+
+
             return path.ToArray();
         }
 
@@ -139,15 +146,6 @@ namespace AI
             float bottom = center.y + (collider.size.y * 0.5f);
 
             return new Vector2(right, bottom);
-        }
-
-
-        private void ShowVertices()
-        {
-            foreach(var v in vertices) {
-                var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                obj.transform.position = v.position;
-            }
         }
     }
 }
