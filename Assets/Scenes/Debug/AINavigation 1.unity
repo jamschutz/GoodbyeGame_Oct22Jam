@@ -458,7 +458,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 026ef81cb40867e44a32a98958e2b243, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  distanceBetweenVertices: 5
+  distanceBetweenVertices: 2
   height: 50
   width: 50
   gizmoRadius: 1

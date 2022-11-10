@@ -8,12 +8,6 @@ namespace Utils.Debug
     {
         public string[] dialog;
 
-        private int index;
-        void Start()
-        {
-            index = 0;
-        }
-
         void Update()
         {
             if(Input.GetKeyDown(KeyCode.KeypadEnter)) {

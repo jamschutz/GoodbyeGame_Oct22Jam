@@ -18,18 +18,41 @@ namespace AI
 
         private List<NavMeshVertex> vertices;
 
+
+        // ========================================================== //
+        // ===========    Lifecycle Methods                ========== //
+        // ========================================================== //
+
         private void Start()
         {
             InitVertices();
-            ShowVertices();
+            BuildVertexConnections();
+            // ShowVertices();
         }
+
+
+        private void Update()
+        {
+            foreach(var vertex in vertices) {
+                foreach(var neighbor in vertex.neighbors) {
+                    Debug.DrawLine(vertex.position, neighbor.position, Color.red, 1);
+                }
+            }
+        }
+
+
+
+
+        // ========================================================== //
+        // ===========    Main Methods                     ========== //
+        // ========================================================== //
 
 
         private void InitVertices()
         {
             // calculate bounds
-            Vector2 start = transform.position;
-            Vector2 end = start + new Vector2(width, height);
+            Vector2 start = GetStart();
+            Vector2 end = GetEnd();
 
             Debug.Log($"start: {start.ToString()},   end: {end.ToString()}");
 
@@ -37,9 +60,16 @@ namespace AI
             vertices = new List<NavMeshVertex>();
             for(float x = start.x; x < end.x; x += distanceBetweenVertices) {
                 for(float y = start.y; y < end.y; y += distanceBetweenVertices) {
+<<<<<<< HEAD
+                    // create vertex at (x, y)
+=======
                     Debug.Log($"at ({x}, {y})");
+>>>>>>> e584d29c99cb97e3889e12af003dd5a4d018064b
                     var vertex = new NavMeshVertex();
                     vertex.position = new Vector2(x, y);
+
+                    // add to list
+                    vertices.Add(vertex);
                 }
             }
 
@@ -47,12 +77,31 @@ namespace AI
         }
 
 
-        private void ShowVertices()
+        private void BuildVertexConnections()
         {
+<<<<<<< HEAD
+            // for each vertex...
+            foreach(var vertex in vertices) {
+                // look at every other vertex
+                foreach(var other in vertices) {
+                    // get distance
+                    float distance = Vector2.Distance(vertex.position, other.position);
+
+                    // if this is us, ignore...
+                    if(distance < float.Epsilon) continue;
+
+                    // otherwise, check if it's within max distance of us
+                    if(distance < distanceBetweenVertices + 0.2f) {
+                        // and if so, register neighbor
+                        vertex.neighbors.Add(other);
+                    }
+                }
+=======
             foreach(var v in vertices) {
                 var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 obj.transform.position = v.position;
                 Debug.Log($"created object at {v.position.ToString()}");
+>>>>>>> e584d29c99cb97e3889e12af003dd5a4d018064b
             }
         }
 
@@ -62,6 +111,54 @@ namespace AI
             var path = new List<Vector3>();
 
             return path.ToArray();
+        }
+
+
+
+
+        // ========================================================== //
+        // ===========    Helper Methods                   ========== //
+        // ========================================================== //
+
+
+        private Vector2 GetStart()
+        {
+            // grab collider
+            var collider = GetComponent<BoxCollider2D>();
+            var center = new Vector2(transform.position.x, transform.position.y) + collider.offset;
+
+            // get bounds
+            float left  = center.x - (collider.size.x * 0.5f);
+            float right = center.x + (collider.size.x * 0.5f);
+            float top    = center.y - (collider.size.y * 0.5f);
+            float bottom = center.y + (collider.size.y * 0.5f);
+
+            return new Vector2(left, top);
+        }
+
+
+        private Vector2 GetEnd()
+        {
+            // grab collider
+            var collider = GetComponent<BoxCollider2D>();
+            var center = new Vector2(transform.position.x, transform.position.y) + collider.offset;
+
+            // get bounds
+            float left  = center.x - (collider.size.x * 0.5f);
+            float right = center.x + (collider.size.x * 0.5f);
+            float top    = center.y - (collider.size.y * 0.5f);
+            float bottom = center.y + (collider.size.y * 0.5f);
+
+            return new Vector2(right, bottom);
+        }
+
+
+        private void ShowVertices()
+        {
+            foreach(var v in vertices) {
+                var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
+                obj.transform.position = v.position;
+            }
         }
     }
 }

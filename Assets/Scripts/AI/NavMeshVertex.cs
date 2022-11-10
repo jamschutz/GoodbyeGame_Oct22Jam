@@ -9,6 +9,12 @@ namespace AI
     public class NavMeshVertex
     {
         public Vector2 position;
-        public NavMeshVertex[] neighbors;
+        public List<NavMeshVertex> neighbors;
+
+
+        public NavMeshVertex()
+        {
+            neighbors = new List<NavMeshVertex>();
+        }
     }
 }
