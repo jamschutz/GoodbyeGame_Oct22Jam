@@ -28,10 +28,8 @@ namespace AI
         private void InitVertices()
         {
             // calculate bounds
-            Vector2 start = transform.position;
-            Vector2 end = start + new Vector2(width, height);
-
-            Debug.Log($"start: {start.ToString()},   end: {end.ToString()}");
+            Vector2 start = GetStart();
+            Vector2 end = GetEnd();
 
             // create vertices
             vertices = new List<NavMeshVertex>();
@@ -45,8 +43,6 @@ namespace AI
                     vertices.Add(vertex);
                 }
             }
-
-            Debug.Log($"created {vertices.Count} vertices");
         }
 
 
@@ -55,7 +51,6 @@ namespace AI
             foreach(var v in vertices) {
                 var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
                 obj.transform.position = v.position;
-                Debug.Log($"created object at {v.position.ToString()}");
             }
         }
 
@@ -65,6 +60,38 @@ namespace AI
             var path = new List<Vector3>();
 
             return path.ToArray();
+        }
+
+
+        private Vector2 GetStart()
+        {
+            // grab collider
+            var collider = GetComponent<BoxCollider2D>();
+            var center = new Vector2(transform.position.x, transform.position.y) + collider.offset;
+
+            // get bounds
+            float left  = center.x - (collider.size.x * 0.5f);
+            float right = center.x + (collider.size.x * 0.5f);
+            float top    = center.y - (collider.size.y * 0.5f);
+            float bottom = center.y + (collider.size.y * 0.5f);
+
+            return new Vector2(left, top);
+        }
+
+
+        private Vector2 GetEnd()
+        {
+            // grab collider
+            var collider = GetComponent<BoxCollider2D>();
+            var center = new Vector2(transform.position.x, transform.position.y) + collider.offset;
+
+            // get bounds
+            float left  = center.x - (collider.size.x * 0.5f);
+            float right = center.x + (collider.size.x * 0.5f);
+            float top    = center.y - (collider.size.y * 0.5f);
+            float bottom = center.y + (collider.size.y * 0.5f);
+
+            return new Vector2(right, bottom);
         }
     }
 }
