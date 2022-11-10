@@ -103,11 +103,16 @@ namespace AI
             var path = new List<Vector3>();
 
             // get vertices nearest start and end
-            float bestDistance = 1000000;
-            Vector3 startingVertex;
-            foreach(var v in vertices) {
-                // startingVertex = Vector2.Distance(start, v.position
-            }
+            int s = GetClosestVertexIndex(start);
+            int e = GetClosestVertexIndex(end);
+            Vector2 startingVertex = vertices[s].position;
+            Vector2 endingVertex = vertices[e].position;
+
+            var availableVertices = vertices;
+            availableVertices.RemoveAt(s);
+            availableVertices.RemoveAt(e);
+
+            
 
 
             return path.ToArray();
@@ -146,6 +151,21 @@ namespace AI
             float bottom = center.y + (collider.size.y * 0.5f);
 
             return new Vector2(right, bottom);
+        }
+
+
+        private int GetClosestVertexIndex(Vector2 pos)
+        {
+            float bestDistance = 1000000;
+            int vertIndex = 0;
+            for(int i = 0; i < vertices.Count; i++) {
+                if(Vector2.Distance(pos, vertices[i].position) < bestDistance) {
+                    vertIndex = i;
+                    bestDistance = Vector2.Distance(pos, vertices[i].position);
+                }
+            }
+
+            return vertIndex;
         }
     }
 }
