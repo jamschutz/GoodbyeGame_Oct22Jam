@@ -140,6 +140,10 @@ namespace UI.Controllers
                 else if(DialogUtils.IsDecisionList(line)) {
                     correctedLine = DialogUtils.GetChoice(lastChoice, line);
                 }
+                // check if we should end the conversation
+                if(DialogUtils.IsEndDialog(correctedLine)) {
+                    break;
+                }
 
                 // type out each letter
                 foreach(var c in correctedLine) {

@@ -459,8 +459,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceBetweenVertices: 5
-  height: 0
-  width: 0
+  height: 50
+  width: 50
+  gizmoRadius: 1
 --- !u!4 &832423082
 Transform:
   m_ObjectHideFlags: 0
