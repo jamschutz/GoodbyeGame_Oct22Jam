@@ -26,7 +26,18 @@ namespace AI
         private void Start()
         {
             InitVertices();
-            ShowVertices();
+            BuildVertexConnections();
+            // ShowVertices();
+        }
+
+
+        private void Update()
+        {
+            foreach(var vertex in vertices) {
+                foreach(var neighbor in vertex.neighbors) {
+                    Debug.DrawLine(vertex.position, neighbor.position, Color.red, 1);
+                }
+            }
         }
 
 
@@ -53,6 +64,28 @@ namespace AI
 
                     // add to list
                     vertices.Add(vertex);
+                }
+            }
+        }
+
+
+        private void BuildVertexConnections()
+        {
+            // for each vertex...
+            foreach(var vertex in vertices) {
+                // look at every other vertex
+                foreach(var other in vertices) {
+                    // get distance
+                    float distance = Vector2.Distance(vertex.position, other.position);
+
+                    // if this is us, ignore...
+                    if(distance < float.Epsilon) continue;
+
+                    // otherwise, check if it's within max distance of us
+                    if(distance < distanceBetweenVertices + 0.2f) {
+                        // and if so, register neighbor
+                        vertex.neighbors.Add(other);
+                    }
                 }
             }
         }
