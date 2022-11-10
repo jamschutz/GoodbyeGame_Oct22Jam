@@ -83,8 +83,13 @@ namespace AI
 
                     // otherwise, check if it's within max distance of us
                     if(distance < distanceBetweenVertices + 0.2f) {
-                        // and if so, register neighbor
-                        vertex.neighbors.Add(other);
+                        // check for things blocking the path...
+                        var hit = Physics2D.Raycast(vertex.position, (other.position - vertex.position).normalized, distanceBetweenVertices, Utils.Globals.NavigationLayer);
+
+                        // if nothing in between, register as neighbor
+                        if(hit.transform == null) {
+                            vertex.neighbors.Add(other);
+                        }
                     }
                 }
             }

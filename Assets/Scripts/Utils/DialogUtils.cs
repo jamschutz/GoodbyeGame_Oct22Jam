@@ -11,6 +11,7 @@ public static class DialogUtils
     public const string CHOICE_OPTIONS_DECLARATION = "{CHOICES: ";
     public const string DECISIONS_DECLARATION = "{DECISIONS: ";
     public const string END_DIALOG_SPECIAL = "{END_DIALOG}";
+    public const string SET_FLAG_SPECIAL = "{SET_FLAG:";
 
     public static bool IsChoice(string dialog)
     {
@@ -28,9 +29,7 @@ public static class DialogUtils
 
     public static bool IsEndDialog(string dialog)
     {
-        dialog = dialog.Trim();
-        if(dialog.Length < END_DIALOG_SPECIAL.Length) return false;
-        return dialog.Substring(0,END_DIALOG_SPECIAL.Length) == END_DIALOG_SPECIAL;
+        return dialog.IndexOf(END_DIALOG_SPECIAL) >= 0;
     }
 
 
@@ -92,5 +91,28 @@ public static class DialogUtils
 
         // return choice!
         return decisions[choice - 1];
+    }
+
+
+    public static string StripFlags(ref string dialog)
+    {
+        // look for {SET_FLAG: 
+        int flagStart = dialog.IndexOf(SET_FLAG_SPECIAL) + SET_FLAG_SPECIAL.Length;
+        
+        // if not found, return null
+        if(flagStart < SET_FLAG_SPECIAL.Length) return null;
+
+        // otherwise, find the closing "}"
+        int flagEnd = dialog.IndexOf("}", flagStart);
+        
+        // parse flag. e.g. "{SET_FLAG:flowers}" --> "flowers"
+        string flag = dialog.Substring(flagStart, flagEnd - flagStart);
+
+        // remove "{SET_FLAG:flowers}" from dialog
+        string beforeFlag = dialog.Substring(0, flagStart - SET_FLAG_SPECIAL.Length);
+        string afterFlag  = flagEnd < dialog.Length - 1? dialog.Substring(flagEnd) : "";
+        dialog = beforeFlag + afterFlag;
+
+        return flag.Trim();
     }
 }
