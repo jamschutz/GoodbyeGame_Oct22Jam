@@ -461,7 +461,7 @@ MonoBehaviour:
   distanceBetweenVertices: 2
   height: 50
   width: 50
-  gizmoRadius: 1
+  showGrid: 0
 --- !u!4 &832423082
 Transform:
   m_ObjectHideFlags: 0
@@ -951,6 +951,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6949381228794117649, guid: f5db57c3247fd4849887061ae9220628, type: 3}
+      propertyPath: navMesh
+      value: 
+      objectReference: {fileID: 832423081}
+    - target: {fileID: 6949381228794117649, guid: f5db57c3247fd4849887061ae9220628, type: 3}
+      propertyPath: destination
+      value: 
+      objectReference: {fileID: 1589906747}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5db57c3247fd4849887061ae9220628, type: 3}
 --- !u!1 &1541786983
@@ -1045,6 +1053,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 832423082}
   m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1589906746
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1589906747}
+  m_Layer: 0
+  m_Name: CaptainDestination
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1589906747
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1589906746}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -16.87, y: -68.99, z: -2.0031736}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1661698471
 GameObject:

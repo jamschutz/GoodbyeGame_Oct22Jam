@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+using System.Linq;
+
 namespace AI.Controller
 {
     public class NavigationController : MonoBehaviour
@@ -12,7 +14,33 @@ namespace AI.Controller
         private Vector2[] routeMarkers;
 
 
+        private void Start()
+        {
+            Invoke("DebugPath", 0.1f);
+        }
 
+
+        private void DebugPath()
+        {
+            var path = GetPathBetweenPoints(transform.position, destination.position);
+
+            Debug.Log("GOT PATH--------------------------------");
+            for(int i = 1; i < path.Length; i++) {
+                Debug.DrawLine(path[i-1], path[i], Color.green, 10);
+            }
+            foreach(var v in path) {
+                Debug.Log($"{v.ToString()}");
+            }
+        }
+
+
+        public Vector2[] GetPathBetweenPoints(Vector3 start, Vector3 end)
+        {
+            var s = new Vector2(start.x, start.y);
+            var e = new Vector2(end.x, end.y);
+
+            return GetPathBetweenPoints(s, e);
+        }
 
 
         public Vector2[] GetPathBetweenPoints(Vector2 start, Vector2 end)
@@ -52,9 +80,9 @@ namespace AI.Controller
                 var current = openSet[0];
 
                 // check if we're at the goal, and if so return
-                if(AtGoal(current, end)) {
+                if(AtGoal(current, vertices[e].position)) {
                     Debug.Log("done!!!!");
-                    return new Vector2[]{};
+                    return GetPath(cameFrom, current, vertices);
                 }
 
                 // pop current node
@@ -100,6 +128,20 @@ namespace AI.Controller
             }
 
             return false;
+        }
+
+
+        private Vector2[] GetPath(Dictionary<int, int> cameFrom, NavMeshVertex current, List<NavMeshVertex> vertices)
+        {
+            var path = new List<Vector2>();
+            path.Add(current.position);
+            while(cameFrom.ContainsKey(current.id)) {
+                current = vertices.Where(v => v.id == cameFrom[current.id]).FirstOrDefault();
+                path.Add(current.position);
+            }
+
+            path.Reverse();
+            return path.ToArray();
         }
     }
 }

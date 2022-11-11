@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1926952446}
   - component: {fileID: 1926952447}
   - component: {fileID: 1926952448}
+  - component: {fileID: 6949381228794117649}
   - component: {fileID: 1926952451}
   m_Layer: 0
   m_Name: Captain
@@ -156,6 +157,20 @@ MonoBehaviour:
   dialog:
   - Ahoy, there!
   - This is your Captain!
+--- !u!114 &6949381228794117649
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 155651315179987539}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2a7d506f95fcbd844a5b287d6f2ad3e0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  navMesh: {fileID: 0}
+  destination: {fileID: 0}
 --- !u!114 &1926952451
 MonoBehaviour:
   m_ObjectHideFlags: 0
