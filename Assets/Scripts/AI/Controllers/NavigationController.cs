@@ -8,38 +8,89 @@ namespace AI.Controller
 {
     public class NavigationController : MonoBehaviour
     {
+        [Header("Movement")]
+        public float moveSpeed = 3;
+
+        [Header("Nav Mesh")]
         public NavMesh navMesh;
         public Transform destination;
 
-        private Vector2[] routeMarkers;
+        private List<Vector2> pathToDestination;
+        private bool isMoving;
+
+
+        // ========================================================== //
+        // ===========    Lifecycle Methods                ========== //
+        // ========================================================== //
 
 
         private void Start()
         {
-            Invoke("DebugPath", 0.1f);
+            isMoving = false;
+            Invoke("MoveOnDelay", 1);
         }
 
 
-        private void DebugPath()
+        private void Update()
         {
-            var path = GetPathBetweenPoints(transform.position, destination.position);
+            if(!isMoving) return;
 
-            Debug.Log("GOT PATH--------------------------------");
-            for(int i = 1; i < path.Length; i++) {
-                Debug.DrawLine(path[i-1], path[i], Color.green, 10);
+            // move towards destination
+            MoveTowardsDestination();
+        }
+
+
+
+        // ========================================================== //
+        // ===========    Main Methods                     ========== //
+        // ========================================================== //
+
+
+        public void MoveToDestination(Transform dest)
+        {
+            MoveToDestination(destination.position);
+        }
+
+
+        public void MoveToDestination(Vector2 dest)
+        {
+            pathToDestination = new List<Vector2>(GetPathBetweenPoints(transform.position, dest));
+            if(pathToDestination.Count > 0) {
+                isMoving = true;
             }
-            foreach(var v in path) {
-                Debug.Log($"{v.ToString()}");
+            else {
+                isMoving = false;
+                Debug.LogError($"tried to move to destination {destination.ToString()} but no path was found.");
             }
         }
 
 
-        public Vector2[] GetPathBetweenPoints(Vector3 start, Vector3 end)
+        private void MoveTowardsDestination()
         {
-            var s = new Vector2(start.x, start.y);
-            var e = new Vector2(end.x, end.y);
+            // check if we're done moving
+            if(pathToDestination.Count == 0) {
+                isMoving = false;
+                return;
+            }
+            
+            // get closest node to move towards
+            var currentTarget = pathToDestination[0];
 
-            return GetPathBetweenPoints(s, e);
+            // check if we've reached current target
+            if(Vector2.Distance(currentTarget, transform.position) <= 0.1f) {
+                // and if so, set target to the next node
+                pathToDestination.RemoveAt(0);
+                if(pathToDestination.Count == 0) {
+                    return;
+                }
+
+                currentTarget = pathToDestination[0];
+            }
+            
+
+            // move!
+            var moveDirection = (currentTarget - new Vector2(transform.position.x, transform.position.y)).normalized;
+            transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
         }
 
 
@@ -109,6 +160,13 @@ namespace AI.Controller
         }
 
 
+
+
+        // ========================================================== //
+        // ===========    Helper Methods                   ========== //
+        // ========================================================== //
+
+
         private float GetScore(Vector2 v, Vector2 end)
         {
             return Vector2.Distance(v, end);
@@ -142,6 +200,26 @@ namespace AI.Controller
 
             path.Reverse();
             return path.ToArray();
+        }
+
+
+        private void DebugPath()
+        {
+            var path = GetPathBetweenPoints(transform.position, destination.position);
+
+            Debug.Log("GOT PATH--------------------------------");
+            for(int i = 1; i < path.Length; i++) {
+                Debug.DrawLine(path[i-1], path[i], Color.green, 10);
+            }
+            foreach(var v in path) {
+                Debug.Log($"{v.ToString()}");
+            }
+        }
+
+
+        private void MoveOnDelay()
+        {
+            MoveToDestination(destination);
         }
     }
 }

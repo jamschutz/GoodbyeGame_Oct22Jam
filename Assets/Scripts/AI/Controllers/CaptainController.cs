@@ -18,18 +18,18 @@ namespace AI.Controller
 
         private void Update()
         {
-            switch(state) {
-                case State.Idle:
-                    // do nothing
-                    break;
-                case State.FollowPlayer:
-                case State.FollowTarget:
-                    MoveTowardsTarget();
-                    break;
-                default:
-                    Debug.LogError($"{gameObject.name} is in unknown state: {state.ToString()}");
-                    break;
-            }
+            // switch(state) {
+            //     case State.Idle:
+            //         // do nothing
+            //         break;
+            //     case State.FollowPlayer:
+            //     case State.FollowTarget:
+            //         MoveTowardsTarget();
+            //         break;
+            //     default:
+            //         Debug.LogError($"{gameObject.name} is in unknown state: {state.ToString()}");
+            //         break;
+            // }
         }
 
 
