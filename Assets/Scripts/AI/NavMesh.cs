@@ -119,6 +119,27 @@ namespace AI
         }
 
 
+        public List<NavMeshVertex> GetVertices()
+        {
+            return vertices;
+        }
+
+
+        public int GetClosestVertexIndex(Vector2 pos)
+        {
+            float bestDistance = 1000000;
+            int vertIndex = 0;
+            for(int i = 0; i < vertices.Count; i++) {
+                if(Vector2.Distance(pos, vertices[i].position) < bestDistance) {
+                    vertIndex = i;
+                    bestDistance = Vector2.Distance(pos, vertices[i].position);
+                }
+            }
+
+            return vertIndex;
+        }
+
+
 
 
         // ========================================================== //
@@ -151,21 +172,6 @@ namespace AI
             float bottom = center.y + (collider.size.y * 0.5f);
 
             return new Vector2(right, bottom);
-        }
-
-
-        private int GetClosestVertexIndex(Vector2 pos)
-        {
-            float bestDistance = 1000000;
-            int vertIndex = 0;
-            for(int i = 0; i < vertices.Count; i++) {
-                if(Vector2.Distance(pos, vertices[i].position) < bestDistance) {
-                    vertIndex = i;
-                    bestDistance = Vector2.Distance(pos, vertices[i].position);
-                }
-            }
-
-            return vertIndex;
         }
     }
 }
