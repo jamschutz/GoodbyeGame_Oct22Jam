@@ -459,8 +459,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   distanceBetweenVertices: 2
-  height: 50
-  width: 50
+  minDistanceFromWalls: 0.5
   showGrid: 0
 --- !u!4 &832423082
 Transform:

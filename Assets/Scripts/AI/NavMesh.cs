@@ -9,8 +9,7 @@ namespace AI
     {
         [Header("Vertices")]
         public float distanceBetweenVertices = 5;
-        public float height;
-        public float width;
+        public float minDistanceFromWalls = 2;
 
         [Header("Editor")]
         public bool showGrid = false;
@@ -64,8 +63,11 @@ namespace AI
                     var vertex = new NavMeshVertex();
                     vertex.position = new Vector2(x, y);
 
-                    // add to list
-                    vertices.Add(vertex);
+                    // check proper distance from walls
+                    var walls = Physics2D.OverlapCircleAll(vertex.position, minDistanceFromWalls, Utils.Globals.NavigationLayer);
+                    if(walls.Length == 0) {
+                        vertices.Add(vertex);
+                    }
                 }
             }
         }
