@@ -13,7 +13,6 @@ namespace AI.Controller
 
         [Header("Nav Mesh")]
         public NavMesh navMesh;
-        public Transform destination;
 
         private List<Vector2> pathToDestination;
         private bool isMoving;
@@ -27,7 +26,6 @@ namespace AI.Controller
         private void Start()
         {
             isMoving = false;
-            Invoke("MoveOnDelay", 1);
         }
 
 
@@ -46,15 +44,15 @@ namespace AI.Controller
         // ========================================================== //
 
 
-        public void MoveToDestination(Transform dest)
+        public void MoveToDestination(Transform destination)
         {
             MoveToDestination(destination.position);
         }
 
 
-        public void MoveToDestination(Vector2 dest)
+        public void MoveToDestination(Vector2 destination)
         {
-            pathToDestination = new List<Vector2>(GetPathBetweenPoints(transform.position, dest));
+            pathToDestination = new List<Vector2>(GetPathBetweenPoints(transform.position, destination));
             if(pathToDestination.Count > 0) {
                 isMoving = true;
             }
@@ -205,21 +203,9 @@ namespace AI.Controller
 
         private void DebugPath()
         {
-            var path = GetPathBetweenPoints(transform.position, destination.position);
-
-            Debug.Log("GOT PATH--------------------------------");
-            for(int i = 1; i < path.Length; i++) {
-                Debug.DrawLine(path[i-1], path[i], Color.green, 10);
+            for(int i = 1; i < pathToDestination.Count; i++) {
+                Debug.DrawLine(pathToDestination[i-1], pathToDestination[i], Color.green, 10);
             }
-            foreach(var v in path) {
-                Debug.Log($"{v.ToString()}");
-            }
-        }
-
-
-        private void MoveOnDelay()
-        {
-            MoveToDestination(destination);
         }
     }
 }

@@ -23,20 +23,6 @@ namespace AI.Controller
             player = GameObject.FindGameObjectWithTag("Player").transform;
             currentTarget = player;
         }
-
-
-
-        protected void MoveTowardsTarget()
-        {
-            // if we're too close, don't move
-            if(Vector2.Distance(currentTarget.position, transform.position) <= followDistance) {
-                return;
-            }
-
-            // otherwise, move!
-            var moveDirection = (currentTarget.position - transform.position).normalized;
-            transform.Translate(moveDirection * moveSpeed * Time.deltaTime, Space.World);
-        }
     }
 }
 
