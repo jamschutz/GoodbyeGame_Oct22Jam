@@ -500,6 +500,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   doneIntro: 0
   finishedD1: 0
+  finishedD2: 0
+  finishedD3: 0
+  finishedD4: 0
+  finishedD5: 0
+  finishedD6: 0
+  finishedD7: 0
+  finishedD8: 0
+  finishedD9: 0
+  finishedD10: 0
   myDialogManager: {fileID: 0}
   dialog01:
   - '{CHOICE}...... {CHOICES: What''s your name? | (not say anything) }'
@@ -516,7 +525,78 @@ MonoBehaviour:
     } '
   - '{DECISIONS: Oh, ok nice to meet you (Name)  | Oh no!}'
   - '{DECISIONS: And I guess I just lost...  | I shouldn''t ask!}'
-  - Let's play again! Game starts!
+  - Let's play again! Game starts!{SET_FLAG:FinishedD2}
+  d3:
+  - '{CHOICE}...... {CHOICES: What''s your favorite food? | (not say anything) }'
+  - '{DECISIONS: You lose!  | {END_DIALOG}}'
+  - Haha!
+  - ......
+  - Burger
+  - Ok let's play again! Game starts!
+  - '{SET_FLAG:FinishedD3}{END_DIALOG}'
+  d4:
+  - 'Hey did you talk to me? '
+  - Oh I guess I lost.
+  - Give me another chance! Game starts!{SET_FLAG:FinishedD4}
+  d5:
+  - '{CHOICE}...... {CHOICES: What''s in a robot''s brain? | (not say anything) } '
+  - '{DECISIONS: You lose again! | {END_DIALOG}} '
+  - And what was in my brain a few minutes ago was the connection between Futurism
+    and the satellites of Mars.
+  - ......
+  - Just kidding. I was thinking about how to make a burger that giraffes would like.
+  - And I am going to continue my thinking. So let's play again. Start!
+  - '{SET_FLAG:FinishedD5}{END_DIALOG}'
+  d6:
+  - '{CHOICE}Are you a robot dog person or a robot cat person? {CHOICES: robot dog
+    | robot cat } '
+  - Oh nevermind. I just lost again.
+  - 'But I like both actually, since they are just robots. '
+  - Let's play again. Start!{SET_FLAG:FinishedD6}
+  d7:
+  - '{CHOICE}...... {CHOICES: What is the trick of this game? | (not say anything)
+    }'
+  - '{DECISIONS: You lose again!  | {END_DIALOG}}'
+  - Hahaha!
+  - 'Okay back to your question. I think the trick is smiling. '
+  - Try smiling next time when you want to talk to me.
+  - We should play again and you can try it! Start!
+  - '{SET_FLAG:FinishedD7}{END_DIALOG}'
+  d8:
+  - I really love this game you know. Thanks for playing this game with me.
+  - Yeah I know I lost. But I still want to tell you this.
+  - Ok next round! Start!{SET_FLAG:FinishedD8}
+  d9:
+  - '{CHOICE}...... {CHOICES: What do you fear the most? | (not say anything) }'
+  - '{DECISIONS: I don''t know...  | {END_DIALOG}}'
+  - I don't know.
+  - 'Maybe I fear the feeling of being unsure about something. '
+  - Like, you know, the feeling that most of the relationship will give you.
+  - That's why I am playing this game with you.
+  - And also you just lost.
+  - Ok next round!
+  - '{SET_FLAG:FinishedD9}{END_DIALOG}'
+  d10:
+  - 'I really miss Albert. He used to play this game with me. '
+  - He was really bad at it. He couldn't resist not talking to me for longer than
+    an hour.
+  - But this time he plays really well...
+  - '{CHOICE} I wonder who will win. {CHOICES: I hope you could figure that out someday.
+    | You lose! } '
+  - '{DECISIONS: Yeah me too. | Yeah I know. } '
+  - '{DECISIONS: You play better than him. | You are really good at it. } '
+  - You are a good opponent.
+  - And we both progress really fast.
+  - Not just our skills, you know what I mean.
+  - ......
+  - Okay
+  - Game start!{SET_FLAG:FinishedD10}
+  d11:
+  - '{CHOICE}...... {CHOICES: Hi! Hogarth! It''s nice to see you. | (not say anything)
+    }'
+  - '{DECISIONS: You lose! | {END_DIALOG}}'
+  - But it's nice to see you too.
+  - Okay, game starts again!
   autoTalkRange: {fileID: 316751293}
 --- !u!1001 &1146083855
 PrefabInstance:
