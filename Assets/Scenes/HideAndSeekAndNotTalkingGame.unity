@@ -594,8 +594,8 @@ MonoBehaviour:
   d11:
   - '{CHOICE}...... {CHOICES: Hi! Hogarth! It''s nice to see you. | (not say anything)
     }'
-  - '{DECISIONS: You lose! | {END_DIALOG}}'
-  - But it's nice to see you too.
+  - '{DECISIONS: You lose! | Hogarth is smiling at you. }'
+  - '{DECISIONS: But it''s nice to see you too. | {END_DIALOG}}'
   - Okay, game starts again!
   autoTalkRange: {fileID: 316751293}
 --- !u!1001 &1146083855
