@@ -2173,6 +2173,17 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1078296638}
   m_CullTransparentMesh: 1
+--- !u!114 &1308579688 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 832423081, guid: 2a22c32f29484a2468d46f7226f22041, type: 3}
+  m_PrefabInstance: {fileID: 55637313}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 026ef81cb40867e44a32a98958e2b243, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1472859975 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1926952451, guid: f5db57c3247fd4849887061ae9220628, type: 3}
@@ -2733,6 +2744,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6949381228794117649, guid: f5db57c3247fd4849887061ae9220628, type: 3}
+      propertyPath: navMesh
+      value: 
+      objectReference: {fileID: 1308579688}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f5db57c3247fd4849887061ae9220628, type: 3}
 --- !u!1 &2063195230

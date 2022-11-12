@@ -9,11 +9,10 @@ namespace AI
     {
         [Header("Vertices")]
         public float distanceBetweenVertices = 5;
-        public float height;
-        public float width;
+        public float minDistanceFromWalls = 2;
 
         [Header("Editor")]
-        public float gizmoRadius = 1;
+        public bool showGrid = false;
 
 
         private List<NavMeshVertex> vertices;
@@ -27,19 +26,21 @@ namespace AI
         {
             InitVertices();
             BuildVertexConnections();
-            // ShowVertices();
         }
 
 
+#if UNITY_EDITOR
         private void Update()
         {
+            if(!showGrid) return;
+
             foreach(var vertex in vertices) {
                 foreach(var neighbor in vertex.neighbors) {
-                    Debug.DrawLine(vertex.position, neighbor.position, Color.red, 1);
+                    Debug.DrawLine(vertex.position, neighbor.position, Color.red, 0.1f);
                 }
             }
         }
-
+#endif
 
 
 
@@ -62,8 +63,11 @@ namespace AI
                     var vertex = new NavMeshVertex();
                     vertex.position = new Vector2(x, y);
 
-                    // add to list
-                    vertices.Add(vertex);
+                    // check proper distance from walls
+                    var walls = Physics2D.OverlapCircleAll(vertex.position, minDistanceFromWalls, Utils.Globals.NavigationLayer);
+                    if(walls.Length == 0) {
+                        vertices.Add(vertex);
+                    }
                 }
             }
         }
@@ -100,7 +104,41 @@ namespace AI
         {
             var path = new List<Vector3>();
 
+            // get vertices nearest start and end
+            int s = GetClosestVertexIndex(start);
+            int e = GetClosestVertexIndex(end);
+            Vector2 startingVertex = vertices[s].position;
+            Vector2 endingVertex = vertices[e].position;
+
+            var availableVertices = vertices;
+            availableVertices.RemoveAt(s);
+            availableVertices.RemoveAt(e);
+
+            
+
+
             return path.ToArray();
+        }
+
+
+        public List<NavMeshVertex> GetVertices()
+        {
+            return vertices;
+        }
+
+
+        public int GetClosestVertexIndex(Vector2 pos)
+        {
+            float bestDistance = 1000000;
+            int vertIndex = 0;
+            for(int i = 0; i < vertices.Count; i++) {
+                if(Vector2.Distance(pos, vertices[i].position) < bestDistance) {
+                    vertIndex = i;
+                    bestDistance = Vector2.Distance(pos, vertices[i].position);
+                }
+            }
+
+            return vertIndex;
         }
 
 
@@ -136,15 +174,6 @@ namespace AI
             float bottom = center.y + (collider.size.y * 0.5f);
 
             return new Vector2(right, bottom);
-        }
-
-
-        private void ShowVertices()
-        {
-            foreach(var v in vertices) {
-                var obj = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                obj.transform.position = v.position;
-            }
         }
     }
 }
