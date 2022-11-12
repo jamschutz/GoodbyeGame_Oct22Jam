@@ -16,6 +16,7 @@ namespace AI.Controller
 
         private List<Vector2> pathToDestination;
         private bool isMoving;
+        private bool isMovePaused;
 
 
         // ========================================================== //
@@ -26,12 +27,13 @@ namespace AI.Controller
         private void Start()
         {
             isMoving = false;
+            isMovePaused = false;
         }
 
 
         private void Update()
         {
-            if(!isMoving) return;
+            if(!isMoving || isMovePaused) return;
 
             // move towards destination
             MoveTowardsDestination();
@@ -42,6 +44,18 @@ namespace AI.Controller
         // ========================================================== //
         // ===========    Main Methods                     ========== //
         // ========================================================== //
+
+
+        public void PauseMovement()
+        {
+            isMovePaused = true;
+        }
+
+
+        public void ResumeMovement()
+        {
+            isMovePaused = false;
+        }
 
 
         public void MoveToDestination(Transform destination)
