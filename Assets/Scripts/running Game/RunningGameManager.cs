@@ -42,7 +42,7 @@ public class RunningGameManager : MonoBehaviour
     {
         if (speedUpTime > 0)
         {
-            if (parentZPos < 27) parentZPos += Time.deltaTime * parentActualSpeed;
+            if (parentZPos < 29) parentZPos += Time.deltaTime * parentActualSpeed;
             if (parentXPos > -8.1f) parentXPos -= Time.deltaTime * parentHorizontalSpeed;
         }
         else
