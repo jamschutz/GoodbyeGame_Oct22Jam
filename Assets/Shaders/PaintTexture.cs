@@ -65,8 +65,19 @@ public class PaintTexture : MonoBehaviour
     }
 
 
+    public Texture2D[] GetPaintings()
+    {
+        return dogPaintings.ToArray();
+    }
+
+
     public void SaveAndClearImage()
     {
+        // Encode texture into PNG
+		byte[] bytes = dogPaintings[dogPaintings.Count - 1].EncodeToPNG();
+
+		// For testing purposes, also write to a file in the project folder
+		System.IO.File.WriteAllBytes(Application.dataPath + "TestDrawing.png", bytes);
         CreateNewPainting();
     }
 
