@@ -14,6 +14,9 @@
 UserSettings/
 UserSettings/Layouts
 
+# Ignore paintable material
+Assets/Shaders/PaintabeMaterial_MAT.mat
+
 # Asset meta data should only be ignored when the corresponding asset is also ignored
 !/[Aa]ssets/**/*.meta
 
