@@ -30,9 +30,6 @@ public class PaintTexture : MonoBehaviour
 
     private void Update()
     {
-        
-        // var screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
-        // Debug.Log($"{rectTransform.rect.ToString()}");
         if(Input.GetKeyDown(KeyCode.Space)) {
             SaveAndClearImage();
         }
@@ -92,8 +89,6 @@ public class PaintTexture : MonoBehaviour
         var paintingCenter = rectTransform.position;
         var paintingDimensions =  new Vector2(rectTransform.rect.width, rectTransform.rect.height);
         var screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
-
-        Debug.Log($"dimensions: {paintingDimensions}");
 
         var xDistance = Mathf.Abs(mousePosition.x - paintingCenter.x);
         var yDistance = Mathf.Abs(mousePosition.y - paintingCenter.y);
