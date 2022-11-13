@@ -14,6 +14,9 @@ namespace AI.Controller
         [Header("Nav Mesh")]
         public NavMesh navMesh;
 
+        [Header("Debug")]
+        public bool showPath = false;
+
         private List<Vector2> pathToDestination;
         private bool isMoving;
         private bool isMovePaused;
@@ -74,6 +77,10 @@ namespace AI.Controller
                 isMoving = false;
                 Debug.LogError($"tried to move to destination {destination.ToString()} but no path was found.");
             }
+
+        #if UNITY_EDITOR
+            if(showPath) DebugPath();
+        #endif
         }
 
 
@@ -144,7 +151,6 @@ namespace AI.Controller
 
                 // check if we're at the goal, and if so return
                 if(AtGoal(current, vertices[e].position)) {
-                    Debug.Log("done!!!!");
                     return GetPath(cameFrom, current, vertices);
                 }
 

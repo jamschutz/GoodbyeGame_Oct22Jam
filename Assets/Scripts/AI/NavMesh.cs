@@ -22,7 +22,7 @@ namespace AI
         // ===========    Lifecycle Methods                ========== //
         // ========================================================== //
 
-        private void Start()
+        private void Awake()
         {
             InitVertices();
             BuildVertexConnections();
