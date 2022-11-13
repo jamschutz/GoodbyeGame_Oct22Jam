@@ -217,6 +217,9 @@ MonoBehaviour:
   pixelRadius: 5
   paintColor: {r: 1, g: 0, b: 0, a: 1}
   mouseStep: 3
+  paintableShader: {fileID: 4800000, guid: 7f069c9ad4692f94ea8e88792b3fbe26, type: 3}
+  dogPaintings: []
+  debugger: []
 --- !u!65 &378209169
 BoxCollider:
   m_ObjectHideFlags: 0
