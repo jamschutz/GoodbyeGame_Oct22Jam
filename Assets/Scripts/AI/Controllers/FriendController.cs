@@ -21,7 +21,7 @@ namespace AI.Controller
             currentWaypoint = 0;
             navigationController = GetComponent<NavigationController>();
 
-            MoveToNextWaypoint();
+            Invoke("MoveToNextWaypoint", 0.1f);
         }
 
 
