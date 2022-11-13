@@ -24,6 +24,15 @@ public class grassMoving : MonoBehaviour
             zPos = -11;
         }
 
+        //GetComponent<SpriteRenderer>().sortingOrder = (int)zPos * -1;
+        /*if (zPos < 0)
+        {
+            
+        }
+        else
+        {
+            GetComponent<SpriteRenderer>().sortingOrder = -1;
+        }*/
 
     }
 }

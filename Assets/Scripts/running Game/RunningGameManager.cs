@@ -13,7 +13,9 @@ public class RunningGameManager : MonoBehaviour
     float parentZPos;
     float parentXPos;
     public float parentActualSpeed;
-    public float parentHorizontalSpeed;
+    public float parentSpeedWhileYouDrawing;
+    public float parentSpeedWhileYouRunning;
+    public float parentHorizontalSpeedMod;
 
     public GameObject player;
     public GameObject parent;
@@ -42,13 +44,15 @@ public class RunningGameManager : MonoBehaviour
     {
         if (speedUpTime > 0)
         {
-            if (parentZPos < 29) parentZPos += Time.deltaTime * parentActualSpeed;
-            if (parentXPos > -8.1f) parentXPos -= Time.deltaTime * parentHorizontalSpeed;
+            /*if (parentZPos < 29) parentZPos += Time.deltaTime * parentActualSpeed;
+            if (parentXPos > -8.1f) parentXPos -= Time.deltaTime * parentHorizontalSpeed;*/
+            parentZPos += Time.deltaTime * parentActualSpeed;
+            parentXPos -= Time.deltaTime * parentHorizontalSpeedMod* parentActualSpeed;
         }
         else
         {
             if (parentZPos > 0) parentZPos -= Time.deltaTime * parentActualSpeed;
-            if (parentXPos < -1) parentXPos += Time.deltaTime * parentHorizontalSpeed;
+            if (parentXPos < -1) parentXPos += Time.deltaTime * parentHorizontalSpeedMod* parentActualSpeed;
         }
 
         
@@ -56,8 +60,8 @@ public class RunningGameManager : MonoBehaviour
 
         if (!isRunning)//drawing
         {
-            
-            grassSpeed = 0;
+            parentActualSpeed = parentSpeedWhileYouDrawing;
+           grassSpeed = 0;
             runOnce = true;
             speedUpTime = -1;
         }
@@ -68,7 +72,7 @@ public class RunningGameManager : MonoBehaviour
                 speedUpTime = speedUpTimeTemp;
                 runOnce = false;
             }
-
+            parentActualSpeed = parentSpeedWhileYouRunning;
             grassSpeed = grassSpeedTemp;
             speedUpTime -= Time.deltaTime;
         }

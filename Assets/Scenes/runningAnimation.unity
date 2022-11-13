@@ -3238,7 +3238,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: -50
   m_Sprite: {fileID: 21300000, guid: db799d91992e1a542a05e2f4bf88cd6d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3258,7 +3258,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1486992736}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 40.8, z: 49.3}
+  m_LocalPosition: {x: -2.7, y: 40.8, z: 49.3}
   m_LocalScale: {x: 10.908, y: 10.908, z: 10.908}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -5111,12 +5111,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c3d52bccf2eff56419bcdc5e0a90e5eb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speedUpTime: 2
+  speedUpTime: 2.5
   grassSpeed: 8
   playerAnimationSpeed: 1
   parentAnimationSpeed: 1
-  parentActualSpeed: 3
-  parentHorizontalSpeed: 1.2
+  parentActualSpeed: 1
+  parentSpeedWhileYouDrawing: 2
+  parentSpeedWhileYouRunning: 1
+  parentHorizontalSpeedMod: 0.5
   player: {fileID: 1930505770}
   parent: {fileID: 1754774902}
   isRunning: 1
