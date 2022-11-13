@@ -67,6 +67,10 @@ public class PaintTexture : MonoBehaviour
 
     public Texture2D[] GetPaintings()
     {
+        // remove last painting
+        if(dogPaintings.Count > 0) {
+            dogPaintings.RemoveAt(dogPaintings.Count - 1);
+        }
         return dogPaintings.ToArray();
     }
 
