@@ -32,7 +32,7 @@ public class PaintTexture : MonoBehaviour
     {
         
         // var screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
-        // Debug.Log($"{rect.position.ToString()} vs center: {screenCenter.ToString()}");
+        // Debug.Log($"{rectTransform.rect.ToString()}");
         if(Input.GetKeyDown(KeyCode.Space)) {
             SaveAndClearImage();
         }
@@ -90,17 +90,20 @@ public class PaintTexture : MonoBehaviour
     private void PaintFromMousePosition(Vector2 mousePosition)
     {
         var paintingCenter = rectTransform.position;
+        var paintingDimensions =  new Vector2(rectTransform.rect.width, rectTransform.rect.height);
         var screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
 
-        var xDistance = Mathf.Abs(mousePosition.x - screenCenter.x);
-        var yDistance = Mathf.Abs(mousePosition.y - screenCenter.y);
+        Debug.Log($"dimensions: {paintingDimensions}");
 
-        var clickedOnImage = xDistance < 250 && yDistance < 250;
+        var xDistance = Mathf.Abs(mousePosition.x - paintingCenter.x);
+        var yDistance = Mathf.Abs(mousePosition.y - paintingCenter.y);
+
+        var clickedOnImage = xDistance < (paintingDimensions.x * 0.5f) && yDistance < (paintingDimensions.y * 0.5f);
         
         if(clickedOnImage) {
             // scale to [0,1]
-            var x = (mousePosition.x - (screenCenter.x - 250)) / 500;
-            var y = (mousePosition.y - (screenCenter.y - 250)) / 500;
+            var x = (float)(mousePosition.x - (paintingCenter.x - paintingDimensions.x * 0.5)) / paintingDimensions.x;
+            var y = (float)(mousePosition.y - (paintingCenter.y - paintingDimensions.y * 0.5)) / paintingDimensions.y;
 
             PaintPixelCoordinate(new Vector2(x, y));
         }
