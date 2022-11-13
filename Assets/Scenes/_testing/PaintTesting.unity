@@ -175,7 +175,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Material: {fileID: 2100000, guid: b1040fbfee51a324a83c4bdb438f6da5, type: 2}
+  m_Material: {fileID: 2100000, guid: 1116373acdba9044e820d51fa0d3ad84, type: 2}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
@@ -213,10 +213,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a29100076589c0f4a8622ba2777e0d0f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintableMaterial: {fileID: 2100000, guid: b1040fbfee51a324a83c4bdb438f6da5, type: 2}
+  paintableMaterial: {fileID: 2100000, guid: 1116373acdba9044e820d51fa0d3ad84, type: 2}
   pixelRadius: 5
-  paintColor: {r: 0, g: 0, b: 0, a: 1}
+  paintColor: {r: 0, g: 0, b: 0, a: 0.11764706}
   mouseStep: 3
+  paperTextures:
+  - {fileID: 2800000, guid: 0c95fd83652fbb44aa81d550170fb8cd, type: 3}
+  - {fileID: 2800000, guid: e2d10666711a2e04eab172c05c92764b, type: 3}
+  - {fileID: 2800000, guid: dc9bddba9f218a345a23b7418385396b, type: 3}
+  - {fileID: 2800000, guid: aad7ce0296a789840b8f94717e31c9b0, type: 3}
+  - {fileID: 2800000, guid: 30cf2f9c1ec00cf40a823ddeef756839, type: 3}
+  - {fileID: 2800000, guid: 5d457a61bf6bf35449f1863324190757, type: 3}
 --- !u!65 &378209169
 BoxCollider:
   m_ObjectHideFlags: 0

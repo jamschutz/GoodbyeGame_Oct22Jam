@@ -5,10 +5,16 @@ using UnityEngine.UI;
 
 public class PaintTexture : MonoBehaviour
 {
+    [Header("Material Reference")]
     public Material paintableMaterial;
+
+    [Header("Drawing")]
     public int pixelRadius;
     public Color paintColor;
     public float mouseStep;
+
+    [Header("Paper")]
+    public Texture2D[] paperTextures;
 
 
     private Vector2 lastMouseInput;
@@ -67,17 +73,20 @@ public class PaintTexture : MonoBehaviour
     private void CreateNewPainting()
     {
         var painting = new Texture2D(500, 500);
+        var paperTexture = paperTextures[Random.Range(0,paperTextures.Length)];
+
+        CopyTextures(ref paperTexture, ref painting);
         dogPaintings.Add(painting);
 
-        for (int y = 0; y < painting.height; y++)
-        {
-            for (int x = 0; x < painting.width; x++)
-            {
-                Color color = ((x & y) != 0 ? Color.white : Color.gray);
-                painting.SetPixel(x, y, Color.white);
-            }
-        }
-        painting.Apply();
+        // for (int y = 0; y < painting.height; y++)
+        // {
+        //     for (int x = 0; x < painting.width; x++)
+        //     {
+        //         Color color = ((x & y) != 0 ? Color.white : Color.gray);
+        //         painting.SetPixel(x, y, Color.white);
+        //     }
+        // }
+        // painting.Apply();
         
         paintableMaterial.SetTexture("_MainTex", painting);
         image.SetMaterialDirty();
@@ -124,13 +133,41 @@ public class PaintTexture : MonoBehaviour
                     int ySym = yCenter - (y - yCenter);
                     // (x, y), (x, ySym), (xSym , y), (xSym, ySym) are in the circle
 
-                    texture.SetPixel(x, y, paintColor);
-                    texture.SetPixel(x, ySym, paintColor);
-                    texture.SetPixel(xSym, y, paintColor);
-                    texture.SetPixel(xSym, ySym, paintColor);
+                    //sourceColour*sourceAlpha + destinationColour*oneMinusSourceAlpha
+
+                    // blend with source color
+                    var sourceColor = texture.GetPixel(x, y);
+                    var alphaColor = (sourceColor * (1 - paintColor.a)) + (paintColor * (paintColor.a));
+
+                    texture.SetPixel(x, y, (texture.GetPixel(x, y) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
+                    texture.SetPixel(x, ySym, (texture.GetPixel(x, ySym) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
+                    texture.SetPixel(xSym, y, (texture.GetPixel(xSym, y) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
+                    texture.SetPixel(xSym, ySym, (texture.GetPixel(xSym, ySym) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
                 }
             }
         }
         texture.Apply();
+    }
+
+
+    private void CopyTextures(ref Texture2D src, ref Texture2D dest)
+    {
+        for (int y = 0; y < src.height; y++)
+        {
+            for (int x = 0; x < src.width; x++)
+            {
+                // read src pixel color
+                Color col = src.GetPixel(x, y);
+                
+                // get nearest pixel in dest
+                int nearestX = Mathf.RoundToInt(((float)x / (float)src.width) * dest.width);
+                int nearestY = Mathf.RoundToInt(((float)y / (float)src.height) * dest.height);
+
+                // and set to src color
+                dest.SetPixel(nearestX, nearestY, col);
+            }
+        }
+
+        dest.Apply();
     }
 }
