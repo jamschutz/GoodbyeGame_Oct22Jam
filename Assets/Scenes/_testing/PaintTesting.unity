@@ -214,9 +214,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   paintableMaterial: {fileID: 2100000, guid: b1040fbfee51a324a83c4bdb438f6da5, type: 2}
-  pixelRadius: 0
+  pixelRadius: 5
   paintColor: {r: 1, g: 0, b: 0, a: 1}
-  texture: {fileID: 0}
+  mouseStep: 3
 --- !u!65 &378209169
 BoxCollider:
   m_ObjectHideFlags: 0

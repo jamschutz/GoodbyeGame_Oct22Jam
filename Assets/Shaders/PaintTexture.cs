@@ -8,7 +8,6 @@ public class PaintTexture : MonoBehaviour
     public Material paintableMaterial;
     public int pixelRadius;
     public Color paintColor;
-    [Range(0,0.1f)]
     public float mouseStep;
 
 
@@ -38,8 +37,23 @@ public class PaintTexture : MonoBehaviour
     private void Update()
     {
         if(Input.GetMouseButton(0)) {
-            var mousePosition = Input.mousePosition;
-            PaintFromMousePosition(mousePosition);
+            // no input last frame
+            if(lastMouseInput.x < 0) {
+                var mousePosition = Input.mousePosition;
+                PaintFromMousePosition(mousePosition);
+            }
+            // draw between last input
+            else {
+                Vector2 mousePosition = Input.mousePosition;
+                var direction = (mousePosition - lastMouseInput).normalized;
+
+                for(Vector2 pos = lastMouseInput; Vector2.Distance(pos, mousePosition) > mouseStep; pos += direction * mouseStep) {
+                    PaintFromMousePosition(pos);
+                }
+                PaintFromMousePosition(mousePosition);
+            }
+            lastMouseInput = Input.mousePosition;
+            
         }
         else {
             lastMouseInput = Vector2.negativeInfinity;
