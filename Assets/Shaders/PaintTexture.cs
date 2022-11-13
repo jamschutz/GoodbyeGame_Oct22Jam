@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class PaintTexture : MonoBehaviour
 {
@@ -9,23 +9,22 @@ public class PaintTexture : MonoBehaviour
     public int pixelRadius;
     public Color paintColor;
     public float mouseStep;
-    public Shader paintableShader;
 
 
     private Vector2 lastMouseInput;
-
-    // public Stack<Texture2D> dogPaintings;
-    public List<Texture2D> dogPaintings;
-    public List<Texture2D> debugger;
+    private List<Texture2D> dogPaintings;
+    private Image image;
 
 
     private void Start()
     {
+        image = GetComponent<Image>();
+        dogPaintings = new List<Texture2D>();
         lastMouseInput = Vector2.negativeInfinity;
 
-        // dogPaintings = new Stack<Texture2D>();
-        dogPaintings = new List<Texture2D>();
         CreateNewPainting();
+
+        
     }
 
 
@@ -79,15 +78,9 @@ public class PaintTexture : MonoBehaviour
             }
         }
         painting.Apply();
-
-
-        // debugger = new List<Texture2D>();
-        // foreach(var p in dogPaintings) {
-        //     debugger.Add(p);
-        // }
         
         paintableMaterial.SetTexture("_MainTex", painting);
-        GetComponent<UnityEngine.UI.Image>().SetMaterialDirty();
+        image.SetMaterialDirty();
     }
 
 
@@ -138,14 +131,4 @@ public class PaintTexture : MonoBehaviour
         }
         texture.Apply();
     }
-
-    
-     private void DebugPoint(Vector2 mousePosition)
-     {
-         Vector2 localCursor;
-         if (!RectTransformUtility.ScreenPointToLocalPointInRectangle(GetComponent<RectTransform>(), mousePosition, Camera.main, out localCursor))
-             return;
- 
-         Debug.Log("LocalCursor:" + localCursor.ToString());
-     }
 }
