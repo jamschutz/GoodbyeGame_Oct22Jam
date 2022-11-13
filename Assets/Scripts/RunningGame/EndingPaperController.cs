@@ -10,6 +10,10 @@ public class EndingPaperController : MonoBehaviour
     public UnityEvent eventBeforeShowPaper;
     public PaintTexture paintScript;
 
+    public float minTimeBetweenDrawings = 0.2f;
+    public AnimationCurve drawingCurve;
+    public int numDrawingsBeforeMin = 10;
+
 
     private Texture2D[] drawings;
 
@@ -40,6 +44,7 @@ public class EndingPaperController : MonoBehaviour
 
     private IEnumerator DrawingShower()
     {
+        int drawingsShown = 0;
         GameObject lastPaperObject = null;
         foreach(var drawing in drawings) {
             if(lastPaperObject != null) {
@@ -54,7 +59,9 @@ public class EndingPaperController : MonoBehaviour
             lastPaperObject.GetComponentInChildren<MeshRenderer>().material.mainTexture = drawing;
 
             // pause
-            yield return new WaitForSeconds(timeBetweenDrawings);
+            float waitTime = Mathf.Lerp(timeBetweenDrawings, minTimeBetweenDrawings, drawingCurve.Evaluate((float)drawingsShown++ / (float)drawings.Length));
+            // timeBetweenDrawings *= 0.6f;
+            yield return new WaitForSeconds(waitTime);
         }
     }
 }

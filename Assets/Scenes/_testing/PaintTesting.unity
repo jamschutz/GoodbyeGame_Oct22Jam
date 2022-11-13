@@ -392,6 +392,32 @@ MonoBehaviour:
           m_BoolArgument: 0
         m_CallState: 2
   paintScript: {fileID: 378209168}
+  minTimeBetweenDrawings: 0.2
+  drawingCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  numDrawingsBeforeMin: 10
 --- !u!1 &1607737118
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,7 +436,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1607737119
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -510,7 +536,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!81 &1833250741
 AudioListener:
   m_ObjectHideFlags: 0
@@ -674,7 +700,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2711385981287287651, guid: 1fb09c0c9b8266047a49d9abac1d7d89, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3380821799585059289, guid: 1fb09c0c9b8266047a49d9abac1d7d89, type: 3}
       propertyPath: m_RootOrder
