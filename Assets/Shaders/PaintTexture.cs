@@ -21,6 +21,7 @@ public class PaintTexture : MonoBehaviour
     private List<Texture2D> dogPaintings;
     private Image image;
     private RectTransform rectTransform;
+    private Texture2D activePaperTexture;
 
 
     private void Start()
@@ -73,20 +74,10 @@ public class PaintTexture : MonoBehaviour
     private void CreateNewPainting()
     {
         var painting = new Texture2D(500, 500);
-        var paperTexture = paperTextures[Random.Range(0,paperTextures.Length)];
+        activePaperTexture = paperTextures[Random.Range(0,paperTextures.Length)];
 
-        CopyTextures(ref paperTexture, ref painting);
+        CopyTextures(ref activePaperTexture, ref painting);
         dogPaintings.Add(painting);
-
-        // for (int y = 0; y < painting.height; y++)
-        // {
-        //     for (int x = 0; x < painting.width; x++)
-        //     {
-        //         Color color = ((x & y) != 0 ? Color.white : Color.gray);
-        //         painting.SetPixel(x, y, Color.white);
-        //     }
-        // }
-        // painting.Apply();
         
         paintableMaterial.SetTexture("_MainTex", painting);
         image.SetMaterialDirty();
@@ -139,10 +130,10 @@ public class PaintTexture : MonoBehaviour
                     var sourceColor = texture.GetPixel(x, y);
                     var alphaColor = (sourceColor * (1 - paintColor.a)) + (paintColor * (paintColor.a));
 
-                    texture.SetPixel(x, y, (texture.GetPixel(x, y) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
-                    texture.SetPixel(x, ySym, (texture.GetPixel(x, ySym) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
-                    texture.SetPixel(xSym, y, (texture.GetPixel(xSym, y) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
-                    texture.SetPixel(xSym, ySym, (texture.GetPixel(xSym, ySym) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
+                    texture.SetPixel(x, y, (activePaperTexture.GetPixel(x, y) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
+                    texture.SetPixel(x, ySym, (activePaperTexture.GetPixel(x, ySym) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
+                    texture.SetPixel(xSym, y, (activePaperTexture.GetPixel(xSym, y) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
+                    texture.SetPixel(xSym, ySym, (activePaperTexture.GetPixel(xSym, ySym) * (1 - paintColor.a)) + (paintColor * (paintColor.a)));
                 }
             }
         }

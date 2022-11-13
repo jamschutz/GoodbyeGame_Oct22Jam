@@ -215,7 +215,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   paintableMaterial: {fileID: 2100000, guid: 1116373acdba9044e820d51fa0d3ad84, type: 2}
   pixelRadius: 5
-  paintColor: {r: 0, g: 0, b: 0, a: 0.11764706}
+  paintColor: {r: 0, g: 0, b: 0, a: 0.7372549}
   mouseStep: 3
   paperTextures:
   - {fileID: 2800000, guid: 0c95fd83652fbb44aa81d550170fb8cd, type: 3}
