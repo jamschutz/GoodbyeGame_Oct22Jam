@@ -14,22 +14,25 @@ public class PaintTexture : MonoBehaviour
     private Vector2 lastMouseInput;
     private List<Texture2D> dogPaintings;
     private Image image;
+    private RectTransform rectTransform;
 
 
     private void Start()
     {
         image = GetComponent<Image>();
         dogPaintings = new List<Texture2D>();
+        rectTransform = GetComponent<RectTransform>();
         lastMouseInput = Vector2.negativeInfinity;
 
         CreateNewPainting();
-
-        
     }
 
 
     private void Update()
     {
+        
+        // var screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
+        // Debug.Log($"{rect.position.ToString()} vs center: {screenCenter.ToString()}");
         if(Input.GetKeyDown(KeyCode.Space)) {
             SaveAndClearImage();
         }
@@ -86,6 +89,7 @@ public class PaintTexture : MonoBehaviour
 
     private void PaintFromMousePosition(Vector2 mousePosition)
     {
+        var paintingCenter = rectTransform.position;
         var screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
 
         var xDistance = Mathf.Abs(mousePosition.x - screenCenter.x);
