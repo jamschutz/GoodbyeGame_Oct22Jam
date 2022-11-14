@@ -21,6 +21,7 @@ public class PaintTexture : MonoBehaviour
     private List<Texture2D> dogPaintings;
     private Image image;
     private RectTransform rectTransform;
+    private Canvas canvas;
     private Texture2D activePaperTexture;
 
 
@@ -29,6 +30,7 @@ public class PaintTexture : MonoBehaviour
         image = GetComponent<Image>();
         dogPaintings = new List<Texture2D>();
         rectTransform = GetComponent<RectTransform>();
+        canvas = GetComponentInParent<Canvas>();
         lastMouseInput = Vector2.negativeInfinity;
 
         CreateNewPainting();
@@ -102,7 +104,8 @@ public class PaintTexture : MonoBehaviour
     private void PaintFromMousePosition(Vector2 mousePosition)
     {
         var paintingCenter = rectTransform.position;
-        var paintingDimensions =  new Vector2(rectTransform.rect.width, rectTransform.rect.height);
+        var paintingDimensions =  new Vector2(rectTransform.rect.width * canvas.scaleFactor, rectTransform.rect.height * canvas.scaleFactor);
+        // Debug.Log($"center: {paintingCenter}, dimensions: {paintingDimensions}, canvas scale: {GetComponentInParent<Canvas>().scaleFactor}");
         var screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
 
         var xDistance = Mathf.Abs(mousePosition.x - paintingCenter.x);
