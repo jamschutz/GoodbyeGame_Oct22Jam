@@ -39,7 +39,7 @@ public class PaintTexture : MonoBehaviour
 
     private void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space)) {
+        if(Input.GetMouseButtonDown(1)) {
             SaveAndClearImage();
         }
         if(Input.GetMouseButton(0)) {
