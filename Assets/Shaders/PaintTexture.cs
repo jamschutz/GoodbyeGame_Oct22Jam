@@ -108,15 +108,15 @@ public class PaintTexture : MonoBehaviour
         // Debug.Log($"center: {paintingCenter}, dimensions: {paintingDimensions}, canvas scale: {GetComponentInParent<Canvas>().scaleFactor}");
         var screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
 
-        var xDistance = Mathf.Abs(mousePosition.x - screenCenter.x);
-        var yDistance = Mathf.Abs(mousePosition.y - screenCenter.y);
+        var xDistance = Mathf.Abs(mousePosition.x - paintingCenter.x);
+        var yDistance = Mathf.Abs(mousePosition.y - paintingCenter.y);
 
         var clickedOnImage = xDistance < (paintingDimensions.x * 0.5f) && yDistance < (paintingDimensions.y * 0.5f);
         
         if(clickedOnImage) {
             // scale to [0,1]
-            var x = (float)(mousePosition.x - (screenCenter.x - paintingDimensions.x * 0.5)) / paintingDimensions.x;
-            var y = (float)(mousePosition.y - (screenCenter.y - paintingDimensions.y * 0.5)) / paintingDimensions.y;
+            var x = (float)(mousePosition.x - (paintingCenter.x - paintingDimensions.x * 0.5)) / paintingDimensions.x;
+            var y = (float)(mousePosition.y - (paintingCenter.y - paintingDimensions.y * 0.5)) / paintingDimensions.y;
 
             PaintPixelCoordinate(new Vector2(x, y));
         }
