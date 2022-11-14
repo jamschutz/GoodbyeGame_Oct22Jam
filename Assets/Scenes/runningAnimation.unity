@@ -452,6 +452,22 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 482.5
       objectReference: {fileID: 0}
+    - target: {fileID: 8171766421989900818, guid: 796437d24fdc66549a8771e0c45bd19e, type: 3}
+      propertyPath: pixelRadius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171766421989900818, guid: 796437d24fdc66549a8771e0c45bd19e, type: 3}
+      propertyPath: paintColor.b
+      value: 0.2264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171766421989900818, guid: 796437d24fdc66549a8771e0c45bd19e, type: 3}
+      propertyPath: paintColor.g
+      value: 0.2264151
+      objectReference: {fileID: 0}
+    - target: {fileID: 8171766421989900818, guid: 796437d24fdc66549a8771e0c45bd19e, type: 3}
+      propertyPath: paintColor.r
+      value: 0.2264151
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 796437d24fdc66549a8771e0c45bd19e, type: 3}
 --- !u!114 &69347667 stripped
@@ -5635,7 +5651,7 @@ MonoBehaviour:
   parentActualSpeed: 1
   parentSpeedWhileYouDrawing: 2
   parentSpeedWhileYouRunning: 1
-  parentHorizontalSpeedMod: 0.5
+  parentHorizontalSpeedMod: 0.3
   player: {fileID: 1930505770}
   parent: {fileID: 1754774902}
   isRunning: 1

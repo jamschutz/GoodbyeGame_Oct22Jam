@@ -16,7 +16,7 @@ public class StartStopRun : MonoBehaviour
             gameManager.isRunning = false;
         }
 
-        if(Input.GetMouseButton(RIGHT_MOUSE)) {
+        if(Input.GetMouseButtonUp(LEFT_MOUSE)) {
             gameManager.isRunning = true;
         }
     }
