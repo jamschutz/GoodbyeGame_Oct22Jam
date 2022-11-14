@@ -18,6 +18,7 @@ public class EndingPaperController : MonoBehaviour
     public float minSpeed = 1;
     public float maxSpeed = 2;
     public float heightBetweenDrawings = 0.045f;
+    public UnityEvent eventOnEnd;
 
 
     private Texture2D[] drawings;
@@ -72,6 +73,8 @@ public class EndingPaperController : MonoBehaviour
             yield return new WaitForSeconds(waitTime);
             obj.GetComponent<Animator>().SetTrigger("FlipPaper");
         }
+
+        eventOnEnd.Invoke();
     }
 }
 
