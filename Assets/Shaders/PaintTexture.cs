@@ -21,6 +21,7 @@ public class PaintTexture : MonoBehaviour
     private List<Texture2D> dogPaintings;
     private Image image;
     private RectTransform rectTransform;
+    private Canvas canvas;
     private Texture2D activePaperTexture;
 
 
@@ -29,6 +30,7 @@ public class PaintTexture : MonoBehaviour
         image = GetComponent<Image>();
         dogPaintings = new List<Texture2D>();
         rectTransform = GetComponent<RectTransform>();
+        canvas = GetComponentInParent<Canvas>();
         lastMouseInput = Vector2.negativeInfinity;
 
         CreateNewPainting();
@@ -102,18 +104,19 @@ public class PaintTexture : MonoBehaviour
     private void PaintFromMousePosition(Vector2 mousePosition)
     {
         var paintingCenter = rectTransform.position;
-        var paintingDimensions =  new Vector2(rectTransform.rect.width, rectTransform.rect.height);
+        var paintingDimensions =  new Vector2(rectTransform.rect.width * canvas.scaleFactor, rectTransform.rect.height * canvas.scaleFactor);
+        // Debug.Log($"center: {paintingCenter}, dimensions: {paintingDimensions}, canvas scale: {GetComponentInParent<Canvas>().scaleFactor}");
         var screenCenter = new Vector2(Screen.width * 0.5f, Screen.height * 0.5f);
 
-        var xDistance = Mathf.Abs(mousePosition.x - paintingCenter.x);
-        var yDistance = Mathf.Abs(mousePosition.y - paintingCenter.y);
+        var xDistance = Mathf.Abs(mousePosition.x - screenCenter.x);
+        var yDistance = Mathf.Abs(mousePosition.y - screenCenter.y);
 
         var clickedOnImage = xDistance < (paintingDimensions.x * 0.5f) && yDistance < (paintingDimensions.y * 0.5f);
         
         if(clickedOnImage) {
             // scale to [0,1]
-            var x = (float)(mousePosition.x - (paintingCenter.x - paintingDimensions.x * 0.5)) / paintingDimensions.x;
-            var y = (float)(mousePosition.y - (paintingCenter.y - paintingDimensions.y * 0.5)) / paintingDimensions.y;
+            var x = (float)(mousePosition.x - (screenCenter.x - paintingDimensions.x * 0.5)) / paintingDimensions.x;
+            var y = (float)(mousePosition.y - (screenCenter.y - paintingDimensions.y * 0.5)) / paintingDimensions.y;
 
             PaintPixelCoordinate(new Vector2(x, y));
         }
